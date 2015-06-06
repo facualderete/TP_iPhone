@@ -19,6 +19,14 @@
     // 1
     CCSprite *_player;
     CCPhysicsNode *_physicsWorld;
+    CGPoint currentJoystickPosition;
+    CCSprite *joystick;
+    CGPoint _playerVelocity;
+    CGPoint _projectileVelocity;
+    CGFloat d;
+    CGPoint a;
+    CCSprite *projectile;
+    CGPoint _projectileHitPosition;
 }
 
 // -----------------------------------------------------------------------
@@ -40,6 +48,7 @@
     
     // 3
     self.userInteractionEnabled = YES;
+    [self setMultipleTouchEnabled:(YES)];
     
     [[OALSimpleAudio sharedInstance] playBg:@"background-music-aac.caf" loop:YES];
     
@@ -63,14 +72,14 @@
     // 6
     //CCActionRotateBy* actionSpin = [CCActionRotateBy actionWithDuration:1.5f angle:360];
     //[_player runAction:[CCActionRepeatForever actionWithAction:actionSpin]];
-    
+    NSLog(@"Print en pantalla!!");
     // 7
     CCButton *backButton = [CCButton buttonWithTitle:@"[ Menu ]" fontName:@"Verdana-Bold" fontSize:18.0f];
     backButton.positionType = CCPositionTypeNormalized;
     backButton.position = ccp(0.85f, 0.95f); // Top Right of screen
     [backButton setTarget:self selector:@selector(onBackClicked:)];
     [self addChild:backButton];
-
+    
 	return self;
 }
 
@@ -142,28 +151,65 @@
 - (void)touchBegan:(CCTouch *)touch withEvent:(CCTouchEvent *)event {
     // 1
     CGPoint touchLocation = [touch locationInNode:self];
+    NSLog(@"Value of X = %0.02f %0.02f", touchLocation.x, touchLocation.y);
     
-    // 2
-    CGPoint offset    = ccpSub(touchLocation, _player.position);
-    float   ratio     = offset.y/offset.x;
-    int     targetX   = _player.contentSize.width/2 + self.contentSize.width;
-    int     targetY   = (targetX*ratio) + _player.position.y;
-    CGPoint targetPosition = ccp(targetX,targetY);
+    joystick = [CCSprite spriteWithImageNamed:@"projectile.png"];
+    [self addChild:joystick];
+    joystick.position = touchLocation;
     
-    // 3
-    CCSprite *projectile = [CCSprite spriteWithImageNamed:@"projectile.png"];
+    _projectileHitPosition = touchLocation;
+    
+    projectile = [CCSprite spriteWithImageNamed:@"projectile.png"];
     projectile.position = _player.position;
     projectile.physicsBody = [CCPhysicsBody bodyWithCircleOfRadius:projectile.contentSize.width/2.0f andCenter:projectile.anchorPointInPoints];
     projectile.physicsBody.collisionGroup = @"playerGroup";
     projectile.physicsBody.collisionType  = @"projectileCollision";
     [_physicsWorld addChild:projectile];
+
+//    CCActionMoveTo *actionMove   = [CCActionMoveTo actionWithDuration:0.5f position:joystick.position];
+//    CCActionRemove *actionRemove = [CCActionRemove action];
+//    [projectile runAction:[CCActionSequence actionWithArray:@[actionMove,actionRemove]]];
+}
+
+-(void)touchMoved:(CCTouch *)touch withEvent:(CCTouchEvent *)event {
     
-    // 4
-    CCActionMoveTo *actionMove   = [CCActionMoveTo actionWithDuration:1.5f position:targetPosition];
-    CCActionRemove *actionRemove = [CCActionRemove action];
-    [projectile runAction:[CCActionSequence actionWithArray:@[actionMove,actionRemove]]];
+    CGPoint touchLocation = [touch locationInNode:self];
+    currentJoystickPosition = touchLocation;
+
+    NSLog(@"Value of X = %0.02f %0.02f", currentJoystickPosition.x, currentJoystickPosition.y);
     
-    [[OALSimpleAudio sharedInstance] playEffect:@"pew-pew-lei.caf"];
+    _playerVelocity = CGPointMake(touchLocation.x - joystick.position.x, touchLocation.y - joystick.position.y);
+    
+    const CGFloat VIRTUAL_JOYSTICK_RADIUS = 20.0f;
+    
+    if (ccpLength(_playerVelocity) > VIRTUAL_JOYSTICK_RADIUS) {
+        //update virtual joystick initial position
+        d = ccpLength(_playerVelocity) - VIRTUAL_JOYSTICK_RADIUS;
+        a = ccpMult(ccpNormalize(_playerVelocity), d);
+        joystick.position = ccpAdd(joystick.position, a);
+    }
+}
+
+- (void) update:(CCTime)delta
+{
+    const CGFloat PLAYER_SPEED = 200.0f;
+    const CGFloat PROJECTILE_SPEED = 200.0f;
+    
+    if (ccpLength(_playerVelocity) > 0.1f) {
+        _player.position = ccpAdd(_player.position,  ccpMult(ccpNormalize(_playerVelocity), delta * PLAYER_SPEED));
+    }
+    
+    _projectileVelocity = CGPointMake(_projectileHitPosition.x - _player.position.x, _projectileHitPosition.y - _player.position.y);
+    
+
+//    projectile.position = ccpAdd(joystick.position,  ccpMult(ccpNormalize(_projectileVelocity), delta));;
+    
+    projectile.physicsBody.velocity = ccpMult(ccpNormalize(_projectileVelocity), PROJECTILE_SPEED);
+}
+
+- (void)touchEnded:(CCTouch *)touch withEvent:(CCTouchEvent *)event {
+    _playerVelocity = CGPointZero;
+    [joystick removeFromParent];
 }
 
 - (BOOL)ccPhysicsCollisionBegin:(CCPhysicsCollisionPair *)pair monsterCollision:(CCNode *)monster projectileCollision:(CCNode *)projectile {
