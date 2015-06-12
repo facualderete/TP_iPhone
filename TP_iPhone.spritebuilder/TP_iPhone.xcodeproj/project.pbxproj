@@ -7,7 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		53E7ECD71B191EB5001E7749 /* HelloWorldScene.m in Sources */ = {isa = PBXBuildFile; fileRef = 53E7ECD41B191EB5001E7749 /* HelloWorldScene.m */; };
+		530A3BAF1B2A278A00CD3ED2 /* Spawner.m in Sources */ = {isa = PBXBuildFile; fileRef = 530A3BAE1B2A278A00CD3ED2 /* Spawner.m */; };
+		53E1BB911B233533005DAEDB /* Player.m in Sources */ = {isa = PBXBuildFile; fileRef = 53E1BB901B233533005DAEDB /* Player.m */; };
 		53E7ECD81B191EB5001E7749 /* IntroScene.m in Sources */ = {isa = PBXBuildFile; fileRef = 53E7ECD61B191EB5001E7749 /* IntroScene.m */; };
 		53E7ECE51B191F2E001E7749 /* monster-hd.png in Resources */ = {isa = PBXBuildFile; fileRef = 53E7ECDF1B191F2E001E7749 /* monster-hd.png */; };
 		53E7ECE61B191F2E001E7749 /* monster.png in Resources */ = {isa = PBXBuildFile; fileRef = 53E7ECE01B191F2E001E7749 /* monster.png */; };
@@ -17,6 +18,8 @@
 		53E7ECEA1B191F2E001E7749 /* projectile.png in Resources */ = {isa = PBXBuildFile; fileRef = 53E7ECE41B191F2E001E7749 /* projectile.png */; };
 		53E7ECED1B191F5E001E7749 /* background-music-aac.caf in Resources */ = {isa = PBXBuildFile; fileRef = 53E7ECEB1B191F5E001E7749 /* background-music-aac.caf */; };
 		53E7ECEE1B191F5E001E7749 /* pew-pew-lei.caf in Resources */ = {isa = PBXBuildFile; fileRef = 53E7ECEC1B191F5E001E7749 /* pew-pew-lei.caf */; };
+		53FB86A01B2657EC001F8ACB /* Projectile.m in Sources */ = {isa = PBXBuildFile; fileRef = 53FB869F1B2657EC001F8ACB /* Projectile.m */; };
+		53FB86A61B265838001F8ACB /* Joystick.m in Sources */ = {isa = PBXBuildFile; fileRef = 53FB86A51B265838001F8ACB /* Joystick.m */; };
 		5B121030197484FA004C1E1D /* TP_iPhoneActivity.m in Sources */ = {isa = PBXBuildFile; fileRef = 5B12102F197484FA004C1E1D /* TP_iPhoneActivity.m */; };
 		5B121038197487F2004C1E1D /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = B737893E1807617C0076A88C /* AppDelegate.m */; };
 		7A046D8C19E8A20E004C4763 /* MainScene.m in Sources */ = {isa = PBXBuildFile; fileRef = B7378993180767190076A88C /* MainScene.m */; };
@@ -159,8 +162,10 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		53E7ECD31B191EB5001E7749 /* HelloWorldScene.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = HelloWorldScene.h; path = Source/HelloWorldScene.h; sourceTree = "<group>"; };
-		53E7ECD41B191EB5001E7749 /* HelloWorldScene.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = HelloWorldScene.m; path = Source/HelloWorldScene.m; sourceTree = "<group>"; };
+		530A3BAB1B2A277900CD3ED2 /* Spawner.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Spawner.h; sourceTree = "<group>"; };
+		530A3BAE1B2A278A00CD3ED2 /* Spawner.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Spawner.m; path = Source/Spawner.m; sourceTree = "<group>"; };
+		53E1BB8D1B2334DE005DAEDB /* Player.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Player.h; sourceTree = "<group>"; };
+		53E1BB901B233533005DAEDB /* Player.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Player.m; sourceTree = "<group>"; };
 		53E7ECD51B191EB5001E7749 /* IntroScene.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = IntroScene.h; path = Source/IntroScene.h; sourceTree = "<group>"; };
 		53E7ECD61B191EB5001E7749 /* IntroScene.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = IntroScene.m; path = Source/IntroScene.m; sourceTree = "<group>"; };
 		53E7ECDF1B191F2E001E7749 /* monster-hd.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "monster-hd.png"; sourceTree = "<group>"; };
@@ -171,6 +176,10 @@
 		53E7ECE41B191F2E001E7749 /* projectile.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = projectile.png; sourceTree = "<group>"; };
 		53E7ECEB1B191F5E001E7749 /* background-music-aac.caf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "background-music-aac.caf"; sourceTree = "<group>"; };
 		53E7ECEC1B191F5E001E7749 /* pew-pew-lei.caf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "pew-pew-lei.caf"; sourceTree = "<group>"; };
+		53FB869F1B2657EC001F8ACB /* Projectile.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Projectile.m; path = Source/Projectile.m; sourceTree = "<group>"; };
+		53FB86A31B2657FE001F8ACB /* Projectile.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Projectile.h; sourceTree = "<group>"; };
+		53FB86A41B265825001F8ACB /* Joystick.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Joystick.h; sourceTree = "<group>"; };
+		53FB86A51B265838001F8ACB /* Joystick.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Joystick.m; path = Source/Joystick.m; sourceTree = "<group>"; };
 		5B12100919748273004C1E1D /* libEGL.so */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libEGL.so; path = /usr/lib/armv7a/libEGL.so; sourceTree = SDKROOT; };
 		5B12100F197483EE004C1E1D /* ic_launcher.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ic_launcher.png; sourceTree = "<group>"; };
 		5B121011197483EE004C1E1D /* ic_launcher.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ic_launcher.png; sourceTree = "<group>"; };
@@ -480,14 +489,20 @@
 		B737893C1807616C0076A88C /* Source */ = {
 			isa = PBXGroup;
 			children = (
-				53E7ECD31B191EB5001E7749 /* HelloWorldScene.h */,
-				53E7ECD41B191EB5001E7749 /* HelloWorldScene.m */,
 				53E7ECD51B191EB5001E7749 /* IntroScene.h */,
 				53E7ECD61B191EB5001E7749 /* IntroScene.m */,
 				7A40362019DDEF0D007B6E8F /* Platforms */,
 				B7378992180767190076A88C /* MainScene.h */,
 				B7378993180767190076A88C /* MainScene.m */,
 				D352B48019EC608A00829775 /* MetalShaders */,
+				53E1BB8D1B2334DE005DAEDB /* Player.h */,
+				53E1BB901B233533005DAEDB /* Player.m */,
+				53FB869F1B2657EC001F8ACB /* Projectile.m */,
+				53FB86A31B2657FE001F8ACB /* Projectile.h */,
+				53FB86A41B265825001F8ACB /* Joystick.h */,
+				53FB86A51B265838001F8ACB /* Joystick.m */,
+				530A3BAB1B2A277900CD3ED2 /* Spawner.h */,
+				530A3BAE1B2A278A00CD3ED2 /* Spawner.m */,
 			);
 			name = Source;
 			sourceTree = "<group>";
@@ -876,9 +891,12 @@
 			files = (
 				B73789871807631A0076A88C /* main.m in Sources */,
 				7A046D8C19E8A20E004C4763 /* MainScene.m in Sources */,
-				53E7ECD71B191EB5001E7749 /* HelloWorldScene.m in Sources */,
+				53FB86A01B2657EC001F8ACB /* Projectile.m in Sources */,
 				5B121038197487F2004C1E1D /* AppDelegate.m in Sources */,
+				53FB86A61B265838001F8ACB /* Joystick.m in Sources */,
+				53E1BB911B233533005DAEDB /* Player.m in Sources */,
 				53E7ECD81B191EB5001E7749 /* IntroScene.m in Sources */,
+				530A3BAF1B2A278A00CD3ED2 /* Spawner.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

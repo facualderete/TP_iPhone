@@ -27,7 +27,7 @@
 
 #import "AppDelegate.h"
 #import "CCBuilderReader.h"
-#import "HelloWorldScene.h"
+#import "MainScene.h"
 
 @implementation AppController
 
@@ -59,8 +59,7 @@
 
 - (CCScene*) startScene
 {
-//    return [CCBReader loadAsScene:@"MainScene"];
-    return [HelloWorldScene scene];
+    return [MainScene scene];
 }
 
 @end

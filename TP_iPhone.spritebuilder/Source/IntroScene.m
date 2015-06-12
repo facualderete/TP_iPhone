@@ -9,7 +9,7 @@
 
 // Import the interfaces
 #import "IntroScene.h"
-#import "HelloWorldScene.h"
+#import "MainScene.h"
 
 // -----------------------------------------------------------------------
 #pragma mark - IntroScene
@@ -37,8 +37,7 @@
     // Create a colored background (Dark Grey)
     CCNodeColor *background = [CCNodeColor nodeWithColor:[CCColor colorWithRed:0.2f green:0.2f blue:0.2f alpha:1.0f]];
     [self addChild:background];
-    
-    // Hello world
+
     CCLabelTTF *label = [CCLabelTTF labelWithString:@"Hello World" fontName:@"Chalkduster" fontSize:36.0f];
     label.positionType = CCPositionTypeNormalized;
     label.color = [CCColor redColor];
@@ -70,7 +69,7 @@
 - (void)onSpinningClicked:(id)sender
 {
     // start spinning scene with transition
-    [[CCDirector sharedDirector] replaceScene:[HelloWorldScene scene]
+    [[CCDirector sharedDirector] replaceScene:[MainScene scene]
                                withTransition:[CCTransition transitionPushWithDirection:CCTransitionDirectionLeft duration:1.0f]];
 }
 
