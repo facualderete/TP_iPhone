@@ -4,6 +4,7 @@
 #import "Projectile.h"
 #import "Joystick.h"
 #import "Spawner.h"
+#import "Monster.h"
 
 @implementation MainScene
 {
@@ -28,6 +29,8 @@
 
 - (id)init
 {
+//    CGSize winSize = [[CCDirector sharedDirector] winSize];
+    
     // 2
     self = [super init];
     if (!self) return(nil);
@@ -49,19 +52,11 @@
     [self addChild:_physicsWorld];
     
     // 5
-    //TODO: ver cómo meter esto dentro de Player sin romper el collisionGroup
-    _player = [Player player];
-    _player.position  = ccp(self.contentSize.width/8,self.contentSize.height/2);
-    _player.physicsBody = [CCPhysicsBody bodyWithRect:(CGRect){CGPointZero, _player.contentSize} cornerRadius:0];
-    _player.physicsBody.collisionGroup = @"playerGroup";
+    _player = [[Player alloc] init];
     [_physicsWorld addChild:_player];
     
     //6
-    _spawner = [Spawner spawner];
-    _spawner.position  = ccp(self.contentSize.width/2,self.contentSize.height/2);
-    _spawner.physicsBody = [CCPhysicsBody bodyWithRect:(CGRect){CGPointZero, _spawner.contentSize} cornerRadius:0];
-    _spawner.physicsBody.collisionGroup = @"spawnerGroup";
-    _spawner.physicsBody.collisionType = @"spawnerCollision";
+    _spawner = [[Spawner alloc] initWithPhysicsWorld:_physicsWorld];
     [_physicsWorld addChild:_spawner];
     
     // 7
@@ -74,52 +69,9 @@
     return self;
 }
 
-- (void)addMonster:(CCTime)dt {
-    
-    CCSprite *monster = [CCSprite spriteWithImageNamed:@"monster.png"];
-    
-    monster.position = _spawner.position;
-    //    monster.position = CGPointMake(self.contentSize.width + monster.contentSize.width/2, randomY);
-    
-    //TODO: ver como pija hacer para que no colisione el monster con el spawner
-    monster.physicsBody = [CCPhysicsBody bodyWithRect:(CGRect){CGPointZero, monster.contentSize} cornerRadius:0];
-    monster.physicsBody.collisionGroup = @"monsterGroup";
-    monster.physicsBody.collisionType  = @"monsterCollision";
-    [_physicsWorld addChild:monster];
-    
-    // 3
-    int minDuration = 2.0;
-    int maxDuration = 4.0;
-    int rangeDuration = maxDuration - minDuration;
-    int randomDuration = (arc4random() % rangeDuration) + minDuration;
-    
-    //TODO: esto hay que cambiarlo por una velocidad fija
-    CCAction *actionMove = [CCActionMoveTo actionWithDuration:randomDuration position:_player.position];
-    CCAction *actionRemove = [CCActionRemove action];
-    [monster runAction:[CCActionSequence actionWithArray:@[actionMove,actionRemove]]];
-    
-    //    CGPoint touchLocation = [touch locationInNode:self];
-    //    currentJoystickPosition = touchLocation;
-    //
-    //    _playerVelocity = CGPointMake(touchLocation.x - _joystick.position.x, touchLocation.y - _joystick.position.y);
-    //
-    //    if (ccpLength(_playerVelocity) > _joystick.radius) {
-    //        d = ccpLength(_playerVelocity) - _joystick.radius;
-    //        a = ccpMult(ccpNormalize(_playerVelocity), d);
-    //        _joystick.position = ccpAdd(_joystick.position, a);
-    //    }
-    
-}
-
 - (void)dealloc
 {
     // clean up code goes here
-}
-
-- (void)onEnter
-{
-    [super onEnter];
-    [self schedule:@selector(addMonster:) interval:1.5];
 }
 
 - (void)onExit
@@ -131,13 +83,13 @@
     // 1
     CGPoint touchLocation = [touch locationInNode:self];
     
-    _joystick = [Joystick joystick];
+    _joystick = [[Joystick alloc] init];
     [self addChild:_joystick];
     _joystick.position = touchLocation;
     
     _projectileHitPosition = touchLocation;
     
-    _projectile = [Projectile projectile];
+    _projectile = [[Projectile alloc] init];
     _projectile.position = _player.position;
     _projectile.physicsBody = [CCPhysicsBody bodyWithCircleOfRadius:_projectile.contentSize.width/2.0f andCenter:_projectile.anchorPointInPoints];
     _projectile.physicsBody.collisionGroup = @"playerGroup";
@@ -165,7 +117,7 @@
         _player.position = ccpAdd(_player.position,  ccpMult(ccpNormalize(_playerVelocity), delta * _player.speed));
     }
     
-    _projectileVelocity = CGPointMake(_projectileHitPosition.x - _player.position.x, _projectileHitPosition.y - _player.position.y);
+    _projectileVelocity = CGPointMake(_projectileHitPosition.x - _projectile.initialPosition.x, _projectileHitPosition.y - _projectile.initialPosition.y);
     
     _projectile.physicsBody.velocity = ccpMult(ccpNormalize(_projectileVelocity), _projectile.speed);
 }
@@ -175,8 +127,22 @@
     [_joystick removeFromParent];
 }
 
-- (BOOL)ccPhysicsCollisionBegin:(CCPhysicsCollisionPair *)pair monsterCollision:(CCNode *)monster projectileCollision:(CCNode *)projectile {
-    [monster removeFromParent];
+- (BOOL)ccPhysicsCollisionBegin:(CCPhysicsCollisionPair *)pair monsterCollision:(CCNode *)monsterNode projectileCollision:(CCNode *)projectileNode {
+    
+    Monster* monster = (Monster*) monsterNode;
+    
+    if ((monster).currentHP > 0) {
+        [monster takeHit];
+    } else {
+        [monsterNode removeFromParent];
+    }
+    
+    [projectileNode removeFromParent];
+    return YES;
+}
+
+- (BOOL)ccPhysicsCollisionBegin:(CCPhysicsCollisionPair *)pair spawnerCollision:(CCNode *)spawner projectileCollision:(CCNode *)projectile {
+    [spawner removeFromParent];
     [projectile removeFromParent];
     return YES;
 }

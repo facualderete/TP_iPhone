@@ -9,10 +9,6 @@
 
 @implementation Joystick
 
-+ (Joystick *)joystick {
-    return [[self alloc] init];
-}
-
 -(id) init {
     
     self = [self initWithImageNamed:@"projectile-hd.png"];

@@ -1,9 +1,11 @@
 #import "cocos2d.h"
 #import "cocos2d-ui.h"
+#import "Entity.h"
 
-@interface Spawner : CCSprite
+@interface Spawner : Entity
 
-+ (Spawner *)spawner;
-- (id)init;
+- (id)initWithPhysicsWorld:(CCPhysicsNode*)physicsWorld;
+
+@property (nonatomic, weak) CCPhysicsNode* physicsWorld;
 
 @end

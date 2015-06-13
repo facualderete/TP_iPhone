@@ -3,8 +3,7 @@
 
 @interface Projectile : CCSprite
 
-+ (Projectile *)projectile;
-- (id)init;
 -(float)speed;
+-(CGPoint)initialPosition;
 
 @end

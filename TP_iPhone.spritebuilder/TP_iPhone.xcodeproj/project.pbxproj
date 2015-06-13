@@ -8,6 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		530A3BAF1B2A278A00CD3ED2 /* Spawner.m in Sources */ = {isa = PBXBuildFile; fileRef = 530A3BAE1B2A278A00CD3ED2 /* Spawner.m */; };
+		53BB600E1B2B8BF9009A4EF0 /* Entity.m in Sources */ = {isa = PBXBuildFile; fileRef = 53BB600D1B2B8BF9009A4EF0 /* Entity.m */; };
+		53BB60111B2B8CF7009A4EF0 /* Monster.m in Sources */ = {isa = PBXBuildFile; fileRef = 53BB60101B2B8CF7009A4EF0 /* Monster.m */; };
 		53E1BB911B233533005DAEDB /* Player.m in Sources */ = {isa = PBXBuildFile; fileRef = 53E1BB901B233533005DAEDB /* Player.m */; };
 		53E7ECD81B191EB5001E7749 /* IntroScene.m in Sources */ = {isa = PBXBuildFile; fileRef = 53E7ECD61B191EB5001E7749 /* IntroScene.m */; };
 		53E7ECE51B191F2E001E7749 /* monster-hd.png in Resources */ = {isa = PBXBuildFile; fileRef = 53E7ECDF1B191F2E001E7749 /* monster-hd.png */; };
@@ -164,6 +166,10 @@
 /* Begin PBXFileReference section */
 		530A3BAB1B2A277900CD3ED2 /* Spawner.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Spawner.h; sourceTree = "<group>"; };
 		530A3BAE1B2A278A00CD3ED2 /* Spawner.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Spawner.m; path = Source/Spawner.m; sourceTree = "<group>"; };
+		53BB600C1B2B8BE9009A4EF0 /* Entity.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Entity.h; sourceTree = "<group>"; };
+		53BB600D1B2B8BF9009A4EF0 /* Entity.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Entity.m; path = Source/Entity.m; sourceTree = "<group>"; };
+		53BB600F1B2B8CE1009A4EF0 /* Monster.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Monster.h; sourceTree = "<group>"; };
+		53BB60101B2B8CF7009A4EF0 /* Monster.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Monster.m; path = Source/Monster.m; sourceTree = "<group>"; };
 		53E1BB8D1B2334DE005DAEDB /* Player.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Player.h; sourceTree = "<group>"; };
 		53E1BB901B233533005DAEDB /* Player.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Player.m; sourceTree = "<group>"; };
 		53E7ECD51B191EB5001E7749 /* IntroScene.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = IntroScene.h; path = Source/IntroScene.h; sourceTree = "<group>"; };
@@ -503,6 +509,10 @@
 				53FB86A51B265838001F8ACB /* Joystick.m */,
 				530A3BAB1B2A277900CD3ED2 /* Spawner.h */,
 				530A3BAE1B2A278A00CD3ED2 /* Spawner.m */,
+				53BB600C1B2B8BE9009A4EF0 /* Entity.h */,
+				53BB600D1B2B8BF9009A4EF0 /* Entity.m */,
+				53BB600F1B2B8CE1009A4EF0 /* Monster.h */,
+				53BB60101B2B8CF7009A4EF0 /* Monster.m */,
 			);
 			name = Source;
 			sourceTree = "<group>";
@@ -895,6 +905,8 @@
 				5B121038197487F2004C1E1D /* AppDelegate.m in Sources */,
 				53FB86A61B265838001F8ACB /* Joystick.m in Sources */,
 				53E1BB911B233533005DAEDB /* Player.m in Sources */,
+				53BB60111B2B8CF7009A4EF0 /* Monster.m in Sources */,
+				53BB600E1B2B8BF9009A4EF0 /* Entity.m in Sources */,
 				53E7ECD81B191EB5001E7749 /* IntroScene.m in Sources */,
 				530A3BAF1B2A278A00CD3ED2 /* Spawner.m in Sources */,
 			);

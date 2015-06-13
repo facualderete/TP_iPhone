@@ -1,4 +1,5 @@
 #import "Projectile.h"
+#import "Player.h"
 
 // -----------------------------------------------------------------------
 #pragma mark - Projectile
@@ -8,25 +9,26 @@
 
 @implementation Projectile
 
-+ (Projectile *)projectile {
-    return [[self alloc] init];
-}
+
+CGPoint initialPosition;
 
 -(id) init {
     
     self = [self initWithImageNamed:@"projectile.png"];
     if (!self) return(nil);
-    self.physicsBody.collisionGroup = @"playerGroup";
-    self.physicsBody.collisionType  = @"projectileCollision";
 
-    
-    
-    
+    initialPosition = [[Player getPlayer] position];
+    self.physicsBody.type = CCPhysicsBodyTypeKinematic;
+
     return self;
 }
 
 -(float)speed {
     return PROJECTILE_SPEED;
+}
+
+-(CGPoint)initialPosition {
+    return initialPosition;
 }
 
 
