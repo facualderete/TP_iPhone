@@ -3,7 +3,8 @@
 
 @interface Entity : CCSprite
 
+-(id) initWithImageNamed:(NSString*)imageName andHP:(int)entityHP;
 -(int)currentHP;
--(void)takeHit;
+-(void)takeHitWithDamage:(int)damage;
 
 @end

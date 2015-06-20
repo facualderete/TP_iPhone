@@ -4,8 +4,6 @@
 
 @interface Monster : Entity
 
-+ (Monster *)monster;
-
 + (Monster*) createMonster;
 
 @end

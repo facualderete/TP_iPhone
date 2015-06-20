@@ -4,7 +4,7 @@
 
 @interface Spawner : Entity
 
-- (id)initWithPhysicsWorld:(CCPhysicsNode*)physicsWorld;
+- (id)initWithPhysicsWorld:(CCPhysicsNode*)physicsWorld andPosition:(CGPoint)position;
 
 @property (nonatomic, weak) CCPhysicsNode* physicsWorld;
 

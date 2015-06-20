@@ -4,7 +4,6 @@
 
 @interface Player : Entity
 
-+ (Player *)player;
 - (id)init;
 -(float)speed;
 

@@ -3,7 +3,6 @@
 
 @interface Joystick : CCSprite
 
-+ (Joystick *)joystick;
 - (id)init;
 -(float)radius;
 

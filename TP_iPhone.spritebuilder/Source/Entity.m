@@ -1,13 +1,15 @@
 #import "Entity.h"
+#import "Player.h"
+#import "EndScene.h"
 
 @implementation Entity
 {
     int hp;
 }
 
-- (id) initWithImageNamed:(NSString*)imageName {
+- (id) initWithImageNamed:(NSString*)imageName andHP:(int)entityHP {
     self = [super initWithImageNamed:imageName];    
-    hp = 5;
+    hp = entityHP;
     return self;
 }
 
@@ -15,8 +17,8 @@
     return hp;
 }
 
--(void)takeHit {
-    hp -= 1;
+-(void)takeHitWithDamage:(int)damage {
+    hp -= damage;
 }
 
 @end

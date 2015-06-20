@@ -5,6 +5,8 @@
 #import "Joystick.h"
 #import "Spawner.h"
 #import "Monster.h"
+#import "GameManager.h"
+#import "EndScene.h"
 
 @implementation MainScene
 {
@@ -20,6 +22,7 @@
     Projectile *_projectile;
     CGPoint _projectileHitPosition;
     Spawner *_spawner;
+    CCLabelTTF *labelPlayerHP;
 }
 
 + (MainScene *)scene
@@ -29,19 +32,14 @@
 
 - (id)init
 {
-//    CGSize winSize = [[CCDirector sharedDirector] winSize];
-    
-    // 2
     self = [super init];
     if (!self) return(nil);
     
-    // 3
     self.userInteractionEnabled = YES;
     [self setMultipleTouchEnabled:(YES)];
     
 //    [[OALSimpleAudio sharedInstance] playBg:@"background-music-aac.caf" loop:YES];
-    
-    // 4
+
     CCNodeColor *background = [CCNodeColor nodeWithColor:[CCColor colorWithRed:0.6f green:0.6f blue:0.6f alpha:1.0f]];
     [self addChild:background];
     
@@ -51,20 +49,23 @@
     _physicsWorld.collisionDelegate = self;
     [self addChild:_physicsWorld];
     
-    // 5
     _player = [[Player alloc] init];
     [_physicsWorld addChild:_player];
     
-    //6
-    _spawner = [[Spawner alloc] initWithPhysicsWorld:_physicsWorld];
+    _spawner = [[Spawner alloc] initWithPhysicsWorld:_physicsWorld andPosition:ccp(0.8f, 0.9f)];
     [_physicsWorld addChild:_spawner];
     
-    // 7
     CCButton *backButton = [CCButton buttonWithTitle:@"[ Menu ]" fontName:@"Verdana-Bold" fontSize:18.0f];
     backButton.positionType = CCPositionTypeNormalized;
     backButton.position = ccp(0.85f, 0.95f); // Top Right of screen
     [backButton setTarget:self selector:@selector(onBackClicked:)];
     [self addChild:backButton];
+    
+    labelPlayerHP = [CCLabelTTF labelWithString:[NSString stringWithFormat:@"Player HP %d", _player.currentHP] fontName:@"Marker Felt" fontSize:12];
+    
+    labelPlayerHP.positionType = CCPositionTypeNormalized;
+    labelPlayerHP.position = ccp(0.1, 0.9);
+    [self addChild:labelPlayerHP];
     
     return self;
 }
@@ -80,15 +81,12 @@
 }
 
 - (void)touchBegan:(CCTouch *)touch withEvent:(CCTouchEvent *)event {
-    // 1
+
     CGPoint touchLocation = [touch locationInNode:self];
-    
     _joystick = [[Joystick alloc] init];
     [self addChild:_joystick];
     _joystick.position = touchLocation;
-    
     _projectileHitPosition = touchLocation;
-    
     _projectile = [[Projectile alloc] init];
     _projectile.position = _player.position;
     _projectile.physicsBody = [CCPhysicsBody bodyWithCircleOfRadius:_projectile.contentSize.width/2.0f andCenter:_projectile.anchorPointInPoints];
@@ -101,7 +99,6 @@
     
     CGPoint touchLocation = [touch locationInNode:self];
     currentJoystickPosition = touchLocation;
-    
     _playerVelocity = CGPointMake(touchLocation.x - _joystick.position.x, touchLocation.y - _joystick.position.y);
     
     if (ccpLength(_playerVelocity) > _joystick.radius) {
@@ -120,6 +117,12 @@
     _projectileVelocity = CGPointMake(_projectileHitPosition.x - _projectile.initialPosition.x, _projectileHitPosition.y - _projectile.initialPosition.y);
     
     _projectile.physicsBody.velocity = ccpMult(ccpNormalize(_projectileVelocity), _projectile.speed);
+
+    if([[GameManager gameManager] spawnerCount] == 0 && [[GameManager gameManager] monsterCount] == 0) {
+        
+        [[CCDirector sharedDirector] replaceScene: [EndScene initWithString: @"A winrar is YOU!"]
+                               withTransition:[CCTransition transitionPushWithDirection:CCTransitionDirectionRight duration:1.0f]];
+    }
 }
 
 - (void)touchEnded:(CCTouch *)touch withEvent:(CCTouchEvent *)event {
@@ -130,26 +133,35 @@
 - (BOOL)ccPhysicsCollisionBegin:(CCPhysicsCollisionPair *)pair monsterCollision:(CCNode *)monsterNode projectileCollision:(CCNode *)projectileNode {
     
     Monster* monster = (Monster*) monsterNode;
-    
-    if ((monster).currentHP > 0) {
-        [monster takeHit];
-    } else {
-        [monsterNode removeFromParent];
-    }
-    
+    [monster takeHitWithDamage:1];
     [projectileNode removeFromParent];
     return YES;
 }
 
-- (BOOL)ccPhysicsCollisionBegin:(CCPhysicsCollisionPair *)pair spawnerCollision:(CCNode *)spawner projectileCollision:(CCNode *)projectile {
-    [spawner removeFromParent];
+- (BOOL)ccPhysicsCollisionBegin:(CCPhysicsCollisionPair *)pair spawnerCollision:(CCNode *)spawnerNode projectileCollision:(CCNode *)projectileNode {
+    
+    Spawner* spawner = (Spawner*) spawnerNode;
+    Projectile* projectile = (Projectile*) projectileNode;
+    
+    [spawner takeHitWithDamage:1];
     [projectile removeFromParent];
+    return YES;
+}
+
+- (BOOL)ccPhysicsCollisionBegin:(CCPhysicsCollisionPair *)pair monsterCollision:(CCNode *)monsterNode playerCollision:(CCNode *)playerNode {
+    
+    Player* player = (Player*) playerNode;
+    Monster* monster = (Monster*) monsterNode;
+    
+    [player takeHitWithDamage:1];
+    [monster takeHitWithDamage:1];
+    
+    [labelPlayerHP setString:[NSString stringWithFormat:@"Player HP %d", _player.currentHP]];
     return YES;
 }
 
 - (void)onBackClicked:(id)sender
 {
-    // back to intro scene with transition
     [[CCDirector sharedDirector] replaceScene:[IntroScene scene]
                                withTransition:[CCTransition transitionPushWithDirection:CCTransitionDirectionRight duration:1.0f]];
 }

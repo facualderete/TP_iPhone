@@ -1,32 +1,12 @@
-//
-//  IntroScene.m
-//  Cocos2DSimpleGame
-//
-//  Created by Martin Walsh on 18/01/2014.
-//  Copyright Razeware LLC 2014. All rights reserved.
-//
-// -----------------------------------------------------------------------
-
-// Import the interfaces
 #import "IntroScene.h"
 #import "MainScene.h"
 
-// -----------------------------------------------------------------------
-#pragma mark - IntroScene
-// -----------------------------------------------------------------------
-
 @implementation IntroScene
-
-// -----------------------------------------------------------------------
-#pragma mark - Create & Destroy
-// -----------------------------------------------------------------------
 
 + (IntroScene *)scene
 {
 	return [[self alloc] init];
 }
-
-// -----------------------------------------------------------------------
 
 - (id)init
 {

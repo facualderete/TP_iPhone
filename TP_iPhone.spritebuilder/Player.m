@@ -1,5 +1,5 @@
 #import "Player.h"
-
+#import "EndScene.h"
 // -----------------------------------------------------------------------
 #pragma mark - Player
 // -----------------------------------------------------------------------
@@ -22,20 +22,14 @@ static Player* sPlayer;
 
 -(id) init {
     
-    self = [self initWithImageNamed:@"player.png"];
+    self = [self initWithImageNamed:@"player.png" andHP:10];
     if (!self) return(nil);
     
     self.position  = ccp(75, 100); //75, 50
     self.physicsBody = [CCPhysicsBody bodyWithRect:(CGRect){CGPointZero, self.contentSize} cornerRadius:0];
     self.physicsBody.collisionGroup = @"playerGroup";
+    self.physicsBody.collisionType = @"playerCollision";
     self.physicsBody.type = CCPhysicsBodyTypeKinematic;
-    
-    
-    
-//    self.physicsBody.collisionGroup = @"playerGroup";    
-//    self.positionType = CCPositionTypeNormalized;
-//    self.position  = ccp(0.1f, 0.1f);
-//    self.physicsBody = [CCPhysicsBody bodyWithRect:(CGRect){CGPointZero, self.contentSize} cornerRadius:0];
     sPlayer = self;
     
     return self;
@@ -43,6 +37,14 @@ static Player* sPlayer;
 
 -(float)speed {
     return PLAYER_SPEED;
+}
+
+-(void)update:(CCTime)delta{
+    if([self currentHP] < 0){
+        [[CCDirector sharedDirector] replaceScene: [EndScene initWithString: @"A loser is YOU!"]
+                                   withTransition:[CCTransition transitionPushWithDirection:CCTransitionDirectionRight duration:1.0f]];
+        [self removeFromParent];
+    }
 }
 
 @end
