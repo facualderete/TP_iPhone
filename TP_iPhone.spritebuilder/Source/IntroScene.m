@@ -1,5 +1,6 @@
 #import "IntroScene.h"
 #import "MainScene.h"
+#import "GameManager.h"
 
 @implementation IntroScene
 
@@ -10,54 +11,61 @@
 
 - (id)init
 {
-    // Apple recommend assigning self with supers return value
     self = [super init];
     if (!self) return(nil);
     
-    // Create a colored background (Dark Grey)
     CCNodeColor *background = [CCNodeColor nodeWithColor:[CCColor colorWithRed:0.2f green:0.2f blue:0.2f alpha:1.0f]];
     [self addChild:background];
 
-    CCLabelTTF *label = [CCLabelTTF labelWithString:@"Hello World" fontName:@"Chalkduster" fontSize:36.0f];
+    CCLabelTTF *label = [CCLabelTTF labelWithString:@"Gauntlet" fontName:@"Chalkduster" fontSize:80.0f];
     label.positionType = CCPositionTypeNormalized;
     label.color = [CCColor redColor];
-    label.position = ccp(0.5f, 0.5f); // Middle of screen
+    label.position = ccp(0.5f, 0.75f); // Middle of screen
     [self addChild:label];
     
-    // Spinning scene button
-    CCButton *spinningButton = [CCButton buttonWithTitle:@"[ Simple Sprite ]" fontName:@"Verdana-Bold" fontSize:18.0f];
-    spinningButton.positionType = CCPositionTypeNormalized;
-    spinningButton.position = ccp(0.5f, 0.35f);
-    [spinningButton setTarget:self selector:@selector(onSpinningClicked:)];
-    [self addChild:spinningButton];
-
-    // Next scene button
-    CCButton *newtonButton = [CCButton buttonWithTitle:@"[ Newton Physics ]" fontName:@"Verdana-Bold" fontSize:18.0f];
-    newtonButton.positionType = CCPositionTypeNormalized;
-    newtonButton.position = ccp(0.5f, 0.20f);
-    [newtonButton setTarget:self selector:@selector(onNewtonClicked:)];
-    [self addChild:newtonButton];
+    CCButton *easyLevelButton = [CCButton buttonWithTitle:@"[ Easy ]" fontName:@"Verdana-Bold" fontSize:18.0f];
+    easyLevelButton.positionType = CCPositionTypeNormalized;
+    easyLevelButton.position = ccp(0.5f, 0.35f);
+    [easyLevelButton setTarget:self selector:@selector(onEasyLevelClicked:)];
+    [self addChild:easyLevelButton];
+    
+    CCButton *normalLevelButton = [CCButton buttonWithTitle:@"[ Normal ]" fontName:@"Verdana-Bold" fontSize:18.0f];
+    normalLevelButton.positionType = CCPositionTypeNormalized;
+    normalLevelButton.position = ccp(0.5f, 0.25f);
+    [normalLevelButton setTarget:self selector:@selector(onNormalLevelClicked:)];
+    [self addChild:normalLevelButton];
+    
+    CCButton *hardLevelButton = [CCButton buttonWithTitle:@"[ Hard ]" fontName:@"Verdana-Bold" fontSize:18.0f];
+    hardLevelButton.positionType = CCPositionTypeNormalized;
+    hardLevelButton.position = ccp(0.5f, 0.15f);
+    [hardLevelButton setTarget:self selector:@selector(onHardLevelClicked:)];
+    [self addChild:hardLevelButton];
 	
-    // done
 	return self;
 }
 
-// -----------------------------------------------------------------------
-#pragma mark - Button Callbacks
-// -----------------------------------------------------------------------
-
-- (void)onSpinningClicked:(id)sender
+- (void)onEasyLevelClicked:(id)sender
 {
-    // start spinning scene with transition
+    [[GameManager gameManager] setPlayerHP:30];
+    [[GameManager gameManager] setMonsterSpeed:50];
     [[CCDirector sharedDirector] replaceScene:[MainScene scene]
                                withTransition:[CCTransition transitionPushWithDirection:CCTransitionDirectionLeft duration:1.0f]];
 }
 
-- (void)onNewtonClicked:(id)sender
+- (void)onNormalLevelClicked:(id)sender
 {
-    // start newton scene with transition
-    // the current scene is pushed, and thus needs popping to be brought back. This is done in the newton scene, when pressing back (upper left corner)
+    [[GameManager gameManager] setPlayerHP:20];
+    [[GameManager gameManager] setMonsterSpeed:100];
+    [[CCDirector sharedDirector] replaceScene:[MainScene scene]
+                               withTransition:[CCTransition transitionPushWithDirection:CCTransitionDirectionLeft duration:1.0f]];
 }
 
-// -----------------------------------------------------------------------
+- (void)onHardLevelClicked:(id)sender
+{
+    [[GameManager gameManager] setPlayerHP:10];
+    [[GameManager gameManager] setMonsterSpeed:120];
+    [[CCDirector sharedDirector] replaceScene:[MainScene scene]
+                               withTransition:[CCTransition transitionPushWithDirection:CCTransitionDirectionLeft duration:1.0f]];
+}
+
 @end

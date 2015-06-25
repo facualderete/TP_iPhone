@@ -1,8 +1,6 @@
 #import "Player.h"
 #import "EndScene.h"
-// -----------------------------------------------------------------------
-#pragma mark - Player
-// -----------------------------------------------------------------------
+#import "GameManager.h"
 
 #define PLAYER_SPEED ((float) 200.0f)
 
@@ -19,13 +17,12 @@ static Player* sPlayer;
     sPlayer = nil;
 }
 
-
 -(id) init {
     
-    self = [self initWithImageNamed:@"player.png" andHP:10];
+    self = [self initWithImageNamed:@"player.png" andHP:[[GameManager gameManager] playerHP]];
     if (!self) return(nil);
     
-    self.position  = ccp(75, 100); //75, 50
+    self.position  = ccp(75, 100);
     self.physicsBody = [CCPhysicsBody bodyWithRect:(CGRect){CGPointZero, self.contentSize} cornerRadius:0];
     self.physicsBody.collisionGroup = @"playerGroup";
     self.physicsBody.collisionType = @"playerCollision";

@@ -6,14 +6,20 @@
 +(GameManager*)gameManager;
 -(int)monsterCount;
 -(int)spawnerCount;
--(int)gameScore;
--(id)init;
 -(int)score;
+-(id)init;
 -(void)incrementMonsterCount;
 -(void)incrementSpawnerCount;
 -(void)incrementScoreCount;
 -(void)decrementMonsterCount;
 -(void)decrementSpawnerCount;
 -(void)resetScore;
+
+-(void)setPlayerHP:(int)hp;
+-(int)playerHP;
+-(void)setMonsterSpeed:(int)speed;
+-(int)monsterSpeed;
+
+-(void)resetCounters;
 
 @end

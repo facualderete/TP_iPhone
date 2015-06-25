@@ -10,7 +10,7 @@
 
 @implementation MainScene
 {
-    // 1
+    int wallThickness;
     Player *_player;
     CCPhysicsNode *_physicsWorld;
     CGPoint currentJoystickPosition;
@@ -25,7 +25,7 @@
     CCLabelTTF *labelPlayerHP;
 }
 
-+ (MainScene *)scene
++ (MainScene*) scene
 {
     return [[self alloc] init];
 }
@@ -35,11 +35,13 @@
     self = [super init];
     if (!self) return(nil);
     
+    wallThickness = 10;
+    
     self.userInteractionEnabled = YES;
     [self setMultipleTouchEnabled:(YES)];
     
 //    [[OALSimpleAudio sharedInstance] playBg:@"background-music-aac.caf" loop:YES];
-
+    
     CCNodeColor *background = [CCNodeColor nodeWithColor:[CCColor colorWithRed:0.6f green:0.6f blue:0.6f alpha:1.0f]];
     [self addChild:background];
     
@@ -48,6 +50,34 @@
     _physicsWorld.debugDraw = YES;
     _physicsWorld.collisionDelegate = self;
     [self addChild:_physicsWorld];
+    
+    CCNode* leftWall = [CCNode node];
+    leftWall.physicsBody = [CCPhysicsBody bodyWithRect:CGRectMake(0, 0, wallThickness, self.contentSize.height) cornerRadius:0.0f];
+    leftWall.physicsBody.collisionType = @"wallCollision";
+    leftWall.physicsBody.collisionGroup = @"wallGroup";
+    leftWall.physicsBody.type = CCPhysicsBodyTypeStatic;
+    [_physicsWorld addChild:leftWall];
+    
+    CCNode* rightWall = [CCNode node];
+    rightWall.physicsBody = [CCPhysicsBody bodyWithRect:CGRectMake(self.contentSize.width - wallThickness, 0, wallThickness, self.contentSize.height) cornerRadius:0.0f];
+    rightWall.physicsBody.collisionType = @"wallCollision";
+    rightWall.physicsBody.collisionGroup = @"wallGroup";
+    rightWall.physicsBody.type = CCPhysicsBodyTypeStatic;
+    [_physicsWorld addChild:rightWall];
+    
+    CCNode* topWall = [CCNode node];
+    topWall.physicsBody = [CCPhysicsBody bodyWithRect:CGRectMake(0, self.contentSize.height - wallThickness, self.contentSize.width, wallThickness) cornerRadius:0.0f];
+    topWall.physicsBody.collisionType = @"wallCollision";
+    topWall.physicsBody.collisionGroup = @"wallGroup";
+    topWall.physicsBody.type = CCPhysicsBodyTypeStatic;
+    [_physicsWorld addChild:topWall];
+    
+    CCNode* bottomWall = [CCNode node];
+    bottomWall.physicsBody = [CCPhysicsBody bodyWithRect:CGRectMake(0, 0, self.contentSize.width, wallThickness) cornerRadius:0.0f];
+    bottomWall.physicsBody.collisionType = @"wallCollision";
+    bottomWall.physicsBody.collisionGroup = @"wallGroup";
+    bottomWall.physicsBody.type = CCPhysicsBodyTypeStatic;
+    [_physicsWorld addChild:bottomWall];
     
     _player = [[Player alloc] init];
     [_physicsWorld addChild:_player];
@@ -82,6 +112,9 @@
 
 - (void)touchBegan:(CCTouch *)touch withEvent:(CCTouchEvent *)event {
 
+    NSLog(@"MonsterCount = %d", [[GameManager gameManager] monsterCount]);
+    NSLog(@"SpawnerCount = %d", [[GameManager gameManager] spawnerCount]);
+    
     CGPoint touchLocation = [touch locationInNode:self];
     _joystick = [[Joystick alloc] init];
     [self addChild:_joystick];
@@ -130,6 +163,9 @@
     [_joystick removeFromParent];
 }
 
+//Collisions
+//-----------------------------------------------------------------------------------------------------
+
 - (BOOL)ccPhysicsCollisionBegin:(CCPhysicsCollisionPair *)pair monsterCollision:(CCNode *)monsterNode projectileCollision:(CCNode *)projectileNode {
     
     Monster* monster = (Monster*) monsterNode;
@@ -160,8 +196,17 @@
     return YES;
 }
 
+- (BOOL)ccPhysicsCollisionBegin:(CCPhysicsCollisionPair *)pair wallCollision:(CCNode *)wallNode projectileCollision:(CCNode *)projectileNode {
+    
+    [projectileNode removeFromParent];
+    return YES;
+}
+
+//-----------------------------------------------------------------------------------------------------
+
 - (void)onBackClicked:(id)sender
 {
+    [[GameManager gameManager] resetCounters];
     [[CCDirector sharedDirector] replaceScene:[IntroScene scene]
                                withTransition:[CCTransition transitionPushWithDirection:CCTransitionDirectionRight duration:1.0f]];
 }

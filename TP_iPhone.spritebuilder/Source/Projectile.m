@@ -1,10 +1,6 @@
 #import "Projectile.h"
 #import "Player.h"
 
-// -----------------------------------------------------------------------
-#pragma mark - Projectile
-// -----------------------------------------------------------------------
-
 #define PROJECTILE_SPEED ((float) 200.0f)
 
 @implementation Projectile

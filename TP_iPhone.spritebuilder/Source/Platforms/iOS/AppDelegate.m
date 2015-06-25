@@ -27,7 +27,7 @@
 
 #import "AppDelegate.h"
 #import "CCBuilderReader.h"
-#import "MainScene.h"
+#import "IntroScene.h"
 
 @implementation AppController
 
@@ -59,7 +59,7 @@
 
 - (CCScene*) startScene
 {
-    return [MainScene scene];
+    return [IntroScene scene];
 }
 
 @end

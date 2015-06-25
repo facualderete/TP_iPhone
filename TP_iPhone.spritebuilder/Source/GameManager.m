@@ -2,9 +2,11 @@
 
 @implementation GameManager {
 
-int monsterCount;
-int spawnerCount;
-int score;
+    int monsterCount;
+    int spawnerCount;
+    int score;
+    int playerHP;
+    int monsterSpeed;
 }
 
 static GameManager* _gameManager = nil;
@@ -35,6 +37,22 @@ static GameManager* _gameManager = nil;
         spawnerCount = 0;
     }
     return self;
+}
+
+-(void)setMonsterSpeed:(int)speed {
+    monsterSpeed = speed;
+}
+
+-(int)monsterSpeed {
+    return monsterSpeed;
+}
+
+-(void)setPlayerHP:(int)hp {
+    playerHP = hp;
+}
+
+-(int)playerHP {
+    return playerHP;
 }
 
 -(int)monsterCount {
@@ -70,6 +88,12 @@ static GameManager* _gameManager = nil;
 }
 
 -(void)resetScore {
+    score = 0;
+}
+
+-(void)resetCounters {
+    monsterCount = 0;
+    spawnerCount = 0;
     score = 0;
 }
 

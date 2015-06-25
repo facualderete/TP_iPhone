@@ -20,7 +20,7 @@
 -(void)update:(CCTime)delta {
     Player *player = [Player getPlayer];
     CGPoint monsterVel = CGPointMake(player.position.x - self.position.x, player.position.y - self.position.y);
-    self.physicsBody.velocity = ccpMult(ccpNormalize(monsterVel), 100);
+    self.physicsBody.velocity = ccpMult(ccpNormalize(monsterVel), [[GameManager gameManager] monsterSpeed]);
     if( [self currentHP] < 0){
         [[GameManager gameManager] decrementMonsterCount];
         [[GameManager gameManager] incrementScoreCount];
