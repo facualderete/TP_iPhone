@@ -59,7 +59,7 @@
     [[GameManager gameManager] setPlayerHP:30];
     [[GameManager gameManager] setMonsterSpeed:50];
     [[CCDirector sharedDirector] replaceScene:[MainScene scene]
-                               withTransition:[CCTransition transitionPushWithDirection:CCTransitionDirectionLeft duration:1.0f]];
+                               withTransition:[CCTransition transitionCrossFadeWithDuration:0.5f]];
 }
 
 - (void)onNormalLevelClicked:(id)sender
@@ -67,7 +67,7 @@
     [[GameManager gameManager] setPlayerHP:20];
     [[GameManager gameManager] setMonsterSpeed:100];
     [[CCDirector sharedDirector] replaceScene:[MainScene scene]
-                               withTransition:[CCTransition transitionPushWithDirection:CCTransitionDirectionLeft duration:1.0f]];
+                               withTransition:[CCTransition transitionCrossFadeWithDuration:0.5f]];
 }
 
 - (void)onHardLevelClicked:(id)sender
@@ -75,7 +75,7 @@
     [[GameManager gameManager] setPlayerHP:10];
     [[GameManager gameManager] setMonsterSpeed:120];
     [[CCDirector sharedDirector] replaceScene:[MainScene scene]
-                               withTransition:[CCTransition transitionPushWithDirection:CCTransitionDirectionLeft duration:1.0f]];
+                               withTransition:[CCTransition transitionCrossFadeWithDuration:0.5f]];
 }
 
 @end

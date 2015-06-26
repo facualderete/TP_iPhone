@@ -13,7 +13,7 @@
     
     self = [self initWithImageNamed:@"joy.png"];
     if (!self) return(nil);
-    
+    self.opacity = 0.75f;
     return self;
 }
 

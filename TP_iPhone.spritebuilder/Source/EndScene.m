@@ -13,7 +13,13 @@
     CCSprite* background;
     
     if (winner) {
-        background = [CCSprite spriteWithImageNamed:@"endScene.png"];
+        background = [CCSprite spriteWithImageNamed:@"win.png"];
+        CGSize winSize = [CCDirector sharedDirector].viewSize;
+        CGSize imageSize = background.contentSize;
+        background.scaleX = winSize.width / imageSize.width;
+        background.scaleY = winSize.height / imageSize.height;
+        background.anchorPoint = CGPointMake(0, 0);
+        [self addChild:background];
         [[OALSimpleAudio sharedInstance] playBg:@"Game Over - Win.mp3" loop:YES];
     } else {
         [[OALSimpleAudio sharedInstance] playBg:@"Game Over - Loose.mp3" loop:YES];
@@ -24,18 +30,10 @@
         [self addChild:label];
     }
     
-    CGSize winSize = [CCDirector sharedDirector].viewSize;
-    CGSize imageSize = background.contentSize;
-    background.scaleX = winSize.width / imageSize.width;
-    background.scaleY = winSize.height / imageSize.height;
-    background.anchorPoint = CGPointMake(0, 0);
-    [self addChild:background];
-    
-
-    
-    CCButton *restartButton = [CCButton buttonWithTitle:@"Restart" fontName:@"Verdana-Bold" fontSize:18.0f];
+    CCButton *restartButton = [CCButton buttonWithTitle:@"Restart" fontName:@"Chalkduster" fontSize:20.0f];
     restartButton.positionType = CCPositionTypeNormalized;
-    restartButton.position = ccp(0.5f, 0.20f);
+    restartButton.position = ccp(0.5f, 0.10f);
+    restartButton.color = [CCColor redColor];
     [restartButton setTarget:self selector:@selector(onResetClicked:)];
     [self addChild:restartButton];
     
