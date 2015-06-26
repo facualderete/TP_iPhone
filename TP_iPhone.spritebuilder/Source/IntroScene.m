@@ -14,32 +14,39 @@
     self = [super init];
     if (!self) return(nil);
     
-	CCSprite* background = [CCSprite spriteWithFile:@"menubackground.png"];
-	background.tag = 1;
+    CGSize winSize = [CCDirector sharedDirector].viewSize;
+    
+	CCSprite* background = [CCSprite spriteWithImageNamed:@"menubackground.png"];
+	CGSize imageSize = background.contentSize;
+    
+    background.scaleX = winSize.width / imageSize.width;
+    background.scaleY = winSize.height / imageSize.height;
+    
+    background.zOrder = 0;
 	background.anchorPoint = CGPointMake(0, 0);
 	[self addChild:background];
 
-    CCLabelTTF *label = [CCLabelTTF labelWithString:@"Gauntlet" fontName:@"Chalkduster" fontSize:80.0f];
-    label.positionType = CCPositionTypeNormalized;
-    label.color = [CCColor redColor];
-    label.position = ccp(0.5f, 0.75f); // Middle of screen
-    [self addChild:label];
+//    CCLabelTTF *label = [CCLabelTTF labelWithString:@"Gauntlet" fontName:@"Chalkduster" fontSize:80.0f];
+//    label.positionType = CCPositionTypeNormalized;
+//    label.color = [CCColor redColor];
+//    label.position = ccp(0.5f, 0.75f); // Middle of screen
+//    [self addChild:label];
     
-    CCButton *easyLevelButton = [CCButton buttonWithTitle:@"[ Easy ]" fontName:@"Verdana-Bold" fontSize:18.0f];
+    CCButton *easyLevelButton = [CCButton buttonWithTitle:@"[ Easy ]" fontName:@"Verdana-Bold" fontSize:24.0f];
     easyLevelButton.positionType = CCPositionTypeNormalized;
-    easyLevelButton.position = ccp(0.5f, 0.35f);
+    easyLevelButton.position = ccp(0.5f, 0.90f);
     [easyLevelButton setTarget:self selector:@selector(onEasyLevelClicked:)];
     [self addChild:easyLevelButton];
     
-    CCButton *normalLevelButton = [CCButton buttonWithTitle:@"[ Normal ]" fontName:@"Verdana-Bold" fontSize:18.0f];
+    CCButton *normalLevelButton = [CCButton buttonWithTitle:@"[ Normal ]" fontName:@"Verdana-Bold" fontSize:24.0f];
     normalLevelButton.positionType = CCPositionTypeNormalized;
-    normalLevelButton.position = ccp(0.5f, 0.25f);
+    normalLevelButton.position = ccp(0.5f, 0.75f);
     [normalLevelButton setTarget:self selector:@selector(onNormalLevelClicked:)];
     [self addChild:normalLevelButton];
     
-    CCButton *hardLevelButton = [CCButton buttonWithTitle:@"[ Hard ]" fontName:@"Verdana-Bold" fontSize:18.0f];
+    CCButton *hardLevelButton = [CCButton buttonWithTitle:@"[ Hard ]" fontName:@"Verdana-Bold" fontSize:24.0f];
     hardLevelButton.positionType = CCPositionTypeNormalized;
-    hardLevelButton.position = ccp(0.5f, 0.15f);
+    hardLevelButton.position = ccp(0.5f, 0.60f);
     [hardLevelButton setTarget:self selector:@selector(onHardLevelClicked:)];
     [self addChild:hardLevelButton];
 	

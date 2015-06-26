@@ -36,7 +36,7 @@
     self = [super init];
     if (!self) return(nil);
     
-    wallThickness = 30;
+    wallThickness = 40;
     wallNotVisible = wallThickness -  (wallThickness / 5);
     
     self.userInteractionEnabled = YES;
@@ -199,6 +199,12 @@
 - (BOOL)ccPhysicsCollisionBegin:(CCPhysicsCollisionPair *)pair wallCollision:(CCNode *)wallNode projectileCollision:(CCNode *)projectileNode {
     
     [projectileNode removeFromParent];
+    return YES;
+}
+
+- (BOOL)ccPhysicsCollisionBegin:(CCPhysicsCollisionPair *)pair wallCollision:(CCNode *)wallNode playerCollision:(CCNode *)projectilePlayer {
+    
+    _playerVelocity = CGPointZero;
     return YES;
 }
 
