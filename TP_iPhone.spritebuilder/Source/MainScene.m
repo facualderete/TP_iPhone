@@ -133,6 +133,12 @@
     _projectile.physicsBody.collisionGroup = @"playerGroup";
     _projectile.physicsBody.collisionType  = @"projectileCollision";
     [_physicsWorld addChild:_projectile];
+    
+    if (touchLocation.x > _player.position.x) {
+        _player.flipX = NO;
+    } else {
+        _player.flipX = YES;
+    }
 }
 
 -(void)touchMoved:(CCTouch *)touch withEvent:(CCTouchEvent *)event {
@@ -145,6 +151,12 @@
         d = ccpLength(_playerVelocity) - _joystick.radius;
         a = ccpMult(ccpNormalize(_playerVelocity), d);
         _joystick.position = ccpAdd(_joystick.position, a);
+    }
+    
+    if ((touchLocation.x - _joystick.position.x) < 0) {
+        _player.flipX = YES;
+    } else {
+        _player.flipX = NO;
     }
 }
 

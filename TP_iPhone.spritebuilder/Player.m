@@ -4,7 +4,10 @@
 
 #define PLAYER_SPEED ((float) 200.0f)
 
-@implementation Player
+@implementation Player {
+
+    int frame_number;
+}
 
 static Player* sPlayer;
 
@@ -19,7 +22,7 @@ static Player* sPlayer;
 
 -(id) init {
     
-    self = [self initWithImageNamed:@"player.png" andHP:[[GameManager gameManager] playerHP]];
+    self = [self initWithImageNamed:[NSString stringWithFormat:@"%@%d.png", @"player-", 1] andHP:[[GameManager gameManager] playerHP]];
     if (!self) return(nil);
     
     self.position  = ccp(75, 150);
@@ -31,6 +34,9 @@ static Player* sPlayer;
     self.physicsBody.allowsRotation = NO;
     sPlayer = self;
     
+    frame_number = 1;
+    [self schedule:@selector(animate:) interval:0.3f];
+    
     return self;
 }
 
@@ -38,11 +44,19 @@ static Player* sPlayer;
     return PLAYER_SPEED;
 }
 
+-(void)animate:(CCTime)delta {
+    NSString* frame_path = [NSString stringWithFormat:@"%@%d.png", @"player-", frame_number];
+    [self setSpriteFrame: [CCSpriteFrame frameWithImageNamed:frame_path]];
+    frame_number++;
+    if (frame_number == 3) {
+        frame_number = 1;
+    }
+}
+
 -(void)update:(CCTime)delta{
-    if([self currentHP] < 0){
-        [[CCDirector sharedDirector] replaceScene: [EndScene initWithString: @"A loser is YOU!" andResult:NO]
+    if([self currentHP] < 1){
+        [[CCDirector sharedDirector] replaceScene: [EndScene initWithString: @"FUCK!!11one" andResult:NO]
                                    withTransition:[CCTransition transitionPushWithDirection:CCTransitionDirectionRight duration:1.0f]];
-        [self removeFromParent];
     }
 }
 
