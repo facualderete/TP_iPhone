@@ -1,5 +1,5 @@
 #import "EndScene.h"
-#import "MainScene.h"
+#import "IntroScene.h"
 
 @implementation EndScene
 
@@ -26,7 +26,7 @@
 }
 
 - (void)onResetClicked:(id)sender {
-    [[CCDirector sharedDirector] replaceScene:[MainScene scene]
+    [[CCDirector sharedDirector] replaceScene:[IntroScene scene]
                                withTransition:[CCTransition transitionPushWithDirection:CCTransitionDirectionLeft duration:1.0f]];
 }
 
