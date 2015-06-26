@@ -15,11 +15,6 @@ CGPoint initialPosition;
 
     initialPosition = [[Player getPlayer] position];
     self.physicsBody.type = CCPhysicsBodyTypeKinematic;
-    
-    CGSize winSize = [CCDirector sharedDirector].viewSize;
-    CGSize imageSize = self.contentSize;
-    self.scaleX = (winSize.width / imageSize.width)/22;
-    self.scaleY = (winSize.height / imageSize.height)/22;
 
     return self;
 }

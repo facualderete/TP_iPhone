@@ -11,7 +11,7 @@
 
 -(id) init {
     
-    self = [self initWithImageNamed:@"projectile-hd.png"];
+    self = [self initWithImageNamed:@"joy.png"];
     if (!self) return(nil);
     
     return self;

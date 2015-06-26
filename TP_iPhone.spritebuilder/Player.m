@@ -19,7 +19,7 @@ static Player* sPlayer;
 
 -(id) init {
     
-    self = [self initWithImageNamed:@"player.png" andHP:[[GameManager gameManager] playerHP]];
+    self = [self initWithImageNamed:@"player-1.png" andHP:[[GameManager gameManager] playerHP]];
     if (!self) return(nil);
     
     self.position  = ccp(75, 150);
