@@ -13,6 +13,7 @@
     monster.physicsBody.collisionType  = @"monsterCollision";
     monster.physicsBody.type = CCPhysicsBodyTypeDynamic;
     monster.physicsBody.allowsRotation = NO;
+    monster.physicsBody.mass = 1;
     [[GameManager gameManager] incrementMonsterCount];
     return monster;
 }

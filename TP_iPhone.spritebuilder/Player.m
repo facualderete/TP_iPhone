@@ -23,10 +23,12 @@ static Player* sPlayer;
     if (!self) return(nil);
     
     self.position  = ccp(75, 100);
-    self.physicsBody = [CCPhysicsBody bodyWithRect:(CGRect){CGPointZero, self.contentSize} cornerRadius:0];
+    self.physicsBody = [CCPhysicsBody bodyWithRect:(CGRect){CGPointZero, self.contentSize} cornerRadius:0.5f];
     self.physicsBody.collisionGroup = @"playerGroup";
     self.physicsBody.collisionType = @"playerCollision";
-    self.physicsBody.type = CCPhysicsBodyTypeKinematic;
+    self.physicsBody.type = CCPhysicsBodyTypeDynamic;
+    self.physicsBody.mass = 10000;
+    self.physicsBody.allowsRotation = NO;
     sPlayer = self;
     
     return self;
