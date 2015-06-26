@@ -3,12 +3,28 @@
 
 @implementation EndScene
 
-+ (EndScene*) initWithString:(NSString*)description {
-    return [[self alloc] initWithString:(NSString*)description];
++ (EndScene*) initWithString:(NSString*)description andResult:(BOOL)winner {
+    return [[self alloc] initWithString:(NSString*)description andResult:(BOOL)winner];
 }
 
-- initWithString:(NSString*)description{
+- initWithString:(NSString*)description andResult:(BOOL)winner{
     self = [super init];
+    
+    CCSprite* background;
+    
+    if (winner) {
+        background = [CCSprite spriteWithImageNamed:@"endScene.png"];
+        [[OALSimpleAudio sharedInstance] playBg:@"Game Over - Win.mp3" loop:YES];
+    } else {
+        [[OALSimpleAudio sharedInstance] playBg:@"Game Over - Loose.mp3" loop:YES];
+    }
+    
+    CGSize winSize = [CCDirector sharedDirector].viewSize;
+    CGSize imageSize = background.contentSize;
+    background.scaleX = winSize.width / imageSize.width;
+    background.scaleY = winSize.height / imageSize.height;
+    background.anchorPoint = CGPointMake(0, 0);
+    [self addChild:background];
     
     CCLabelTTF *label = [CCLabelTTF labelWithString:description fontName:@"Chalkduster" fontSize:36.0f];
     label.positionType = CCPositionTypeNormalized;

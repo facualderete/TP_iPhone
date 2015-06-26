@@ -3,6 +3,6 @@
 
 @interface EndScene : CCScene
 
-+ (EndScene*)initWithString:(NSString*)description;
++ (EndScene*) initWithString:(NSString*)description andResult:(BOOL)winner;
 
 @end

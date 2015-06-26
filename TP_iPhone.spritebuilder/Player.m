@@ -22,7 +22,7 @@ static Player* sPlayer;
     self = [self initWithImageNamed:@"player.png" andHP:[[GameManager gameManager] playerHP]];
     if (!self) return(nil);
     
-    self.position  = ccp(75, 100);
+    self.position  = ccp(75, 150);
     self.physicsBody = [CCPhysicsBody bodyWithRect:(CGRect){CGPointZero, self.contentSize} cornerRadius:0.5f];
     self.physicsBody.collisionGroup = @"playerGroup";
     self.physicsBody.collisionType = @"playerCollision";
@@ -40,7 +40,7 @@ static Player* sPlayer;
 
 -(void)update:(CCTime)delta{
     if([self currentHP] < 0){
-        [[CCDirector sharedDirector] replaceScene: [EndScene initWithString: @"A loser is YOU!"]
+        [[CCDirector sharedDirector] replaceScene: [EndScene initWithString: @"A loser is YOU!" andResult:NO]
                                    withTransition:[CCTransition transitionPushWithDirection:CCTransitionDirectionRight duration:1.0f]];
         [self removeFromParent];
     }

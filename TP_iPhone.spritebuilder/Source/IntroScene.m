@@ -22,9 +22,10 @@
     background.scaleX = winSize.width / imageSize.width;
     background.scaleY = winSize.height / imageSize.height;
     
-    background.zOrder = 0;
 	background.anchorPoint = CGPointMake(0, 0);
 	[self addChild:background];
+    
+    [[OALSimpleAudio sharedInstance] playBg:@"Menu.mp3" loop:YES];
 
 //    CCLabelTTF *label = [CCLabelTTF labelWithString:@"Gauntlet" fontName:@"Chalkduster" fontSize:80.0f];
 //    label.positionType = CCPositionTypeNormalized;

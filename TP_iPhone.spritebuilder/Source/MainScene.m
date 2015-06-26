@@ -36,20 +36,27 @@
     self = [super init];
     if (!self) return(nil);
     
-    wallThickness = 40;
+    CGSize winSize = [CCDirector sharedDirector].viewSize;
+    CCSprite* background = [CCSprite spriteWithImageNamed:@"bg1.png"];
+    CGSize imageSize = background.contentSize;
+    background.scaleX = winSize.width / imageSize.width;
+    background.scaleY = winSize.height / imageSize.height;
+    background.anchorPoint = CGPointMake(0, 0);
+    [self addChild:background];
+    
+    wallThickness = 50;
     wallNotVisible = wallThickness -  (wallThickness / 5);
     
     self.userInteractionEnabled = YES;
     [self setMultipleTouchEnabled:(YES)];
     
-//    [[OALSimpleAudio sharedInstance] playBg:@"background-music-aac.caf" loop:YES];
-    
-    CCNodeColor *background = [CCNodeColor nodeWithColor:[CCColor colorWithRed:0.6f green:0.6f blue:0.6f alpha:1.0f]];
-    [self addChild:background];
-    
+    [[OALSimpleAudio sharedInstance] playBg:@"Game Music.mp3" loop:YES];
+
     _physicsWorld = [CCPhysicsNode node];
     _physicsWorld.gravity = ccp(0,0);
-    _physicsWorld.debugDraw = YES;
+    //TODO: sacar esto!!
+//    _physicsWorld.debugDraw = YES;
+    
     _physicsWorld.collisionDelegate = self;
     [self addChild:_physicsWorld];
     
@@ -153,7 +160,7 @@
 
     if([[GameManager gameManager] spawnerCount] == 0 && [[GameManager gameManager] monsterCount] == 0) {
         
-        [[CCDirector sharedDirector] replaceScene: [EndScene initWithString: @"A winrar is YOU!"]
+        [[CCDirector sharedDirector] replaceScene: [EndScene initWithString: @"A winrar is YOU!" andResult:YES]
                                withTransition:[CCTransition transitionPushWithDirection:CCTransitionDirectionRight duration:1.0f]];
     }
 }
