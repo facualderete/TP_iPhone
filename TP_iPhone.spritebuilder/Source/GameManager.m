@@ -7,6 +7,7 @@
     int score;
     int playerHP;
     int monsterSpeed;
+    int spawnerDifficulty;
 }
 
 static GameManager* _gameManager = nil;
@@ -37,6 +38,14 @@ static GameManager* _gameManager = nil;
         spawnerCount = 0;
     }
     return self;
+}
+
+-(void)setSpawnerDifficulty:(int)diff {
+    spawnerDifficulty = diff;
+}
+
+-(int)getSpawnerDifficulty {
+    return spawnerDifficulty;
 }
 
 -(void)setMonsterSpeed:(int)speed {

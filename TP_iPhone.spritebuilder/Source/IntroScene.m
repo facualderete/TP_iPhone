@@ -14,6 +14,23 @@
     self = [super init];
     if (!self) return(nil);
     
+    [[OALSimpleAudio sharedInstance] preloadBg:@"Menu.mp3"];
+    [[OALSimpleAudio sharedInstance] preloadBg:@"Game Over - Loose.mp3"];
+    [[OALSimpleAudio sharedInstance] preloadBg:@"Game Over - Win.mp3"];
+    [[OALSimpleAudio sharedInstance] preloadBg:@"Game Music.mp3"];
+
+    [[OALSimpleAudio sharedInstance] preloadEffect:@"fuck.mp3"];
+    [[OALSimpleAudio sharedInstance] preloadEffect:@"lowhealth.mp3"];
+    [[OALSimpleAudio sharedInstance] preloadEffect:@"playerDeath.mp3"];
+    [[OALSimpleAudio sharedInstance] preloadEffect:@"playerhit-1.wav"];
+    [[OALSimpleAudio sharedInstance] preloadEffect:@"playerhit-2.wav"];
+    [[OALSimpleAudio sharedInstance] preloadEffect:@"playerhit-3.wav"];
+    [[OALSimpleAudio sharedInstance] preloadEffect:@"playerhit-4.wav"];
+    [[OALSimpleAudio sharedInstance] preloadEffect:@"playerhit-5.wav"];
+    [[OALSimpleAudio sharedInstance] preloadEffect:@"playerhit-6.wav"];
+    [[OALSimpleAudio sharedInstance] preloadEffect:@"skeletonhit.mp3"];
+    [[OALSimpleAudio sharedInstance] preloadEffect:@"lasershot.wav"];
+    
     CGSize winSize = [CCDirector sharedDirector].viewSize;
     
 	CCSprite* background = [CCSprite spriteWithImageNamed:@"menubackground.png"];
@@ -56,24 +73,27 @@
 
 - (void)onEasyLevelClicked:(id)sender
 {
-    [[GameManager gameManager] setPlayerHP:30];
+    [[GameManager gameManager] setPlayerHP:20];
     [[GameManager gameManager] setMonsterSpeed:50];
+    [[GameManager gameManager] setSpawnerDifficulty:1];
     [[CCDirector sharedDirector] replaceScene:[MainScene scene]
                                withTransition:[CCTransition transitionCrossFadeWithDuration:0.5f]];
 }
 
 - (void)onNormalLevelClicked:(id)sender
 {
-    [[GameManager gameManager] setPlayerHP:20];
+    [[GameManager gameManager] setPlayerHP:10];
     [[GameManager gameManager] setMonsterSpeed:100];
+    [[GameManager gameManager] setSpawnerDifficulty:2];
     [[CCDirector sharedDirector] replaceScene:[MainScene scene]
                                withTransition:[CCTransition transitionCrossFadeWithDuration:0.5f]];
 }
 
 - (void)onHardLevelClicked:(id)sender
 {
-    [[GameManager gameManager] setPlayerHP:10];
-    [[GameManager gameManager] setMonsterSpeed:120];
+    [[GameManager gameManager] setPlayerHP:5];
+    [[GameManager gameManager] setMonsterSpeed:150];
+    [[GameManager gameManager] setSpawnerDifficulty:3];
     [[CCDirector sharedDirector] replaceScene:[MainScene scene]
                                withTransition:[CCTransition transitionCrossFadeWithDuration:0.5f]];
 }

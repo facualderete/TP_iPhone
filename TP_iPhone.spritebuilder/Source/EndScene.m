@@ -20,14 +20,15 @@
         background.scaleY = winSize.height / imageSize.height;
         background.anchorPoint = CGPointMake(0, 0);
         [self addChild:background];
-        [[OALSimpleAudio sharedInstance] playBg:@"Game Over - Win.mp3" loop:YES];
+        [[OALSimpleAudio sharedInstance] playBg:@"Game Over - Win.mp3" loop:NO];
     } else {
-        [[OALSimpleAudio sharedInstance] playBg:@"Game Over - Loose.mp3" loop:YES];
+        [[OALSimpleAudio sharedInstance] playBg:@"Game Over - Loose.mp3" loop:NO];
         CCLabelTTF *label = [CCLabelTTF labelWithString:description fontName:@"Chalkduster" fontSize:36.0f];
         label.positionType = CCPositionTypeNormalized;
         label.color = [CCColor redColor];
         label.position = ccp(0.5f, 0.5f);
         [self addChild:label];
+        [[OALSimpleAudio sharedInstance] playEffect:@"fuck.mp3" loop:NO];
     }
     
     CCButton *restartButton = [CCButton buttonWithTitle:@"Restart" fontName:@"Chalkduster" fontSize:20.0f];

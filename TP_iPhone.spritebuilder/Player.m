@@ -54,7 +54,13 @@ static Player* sPlayer;
 }
 
 -(void)update:(CCTime)delta{
+    
+    if (self.currentHP == 1) {
+        [[OALSimpleAudio sharedInstance] playEffect:@"lowhealth.mp3" loop:NO];
+    }
+    
     if([self currentHP] < 1){
+        [[OALSimpleAudio sharedInstance] playEffect:@"playerDeath.mp3" loop:NO];
         [[CCDirector sharedDirector] replaceScene: [EndScene initWithString: @"FUCK!!11one" andResult:NO]
                                    withTransition:[CCTransition transitionPushWithDirection:CCTransitionDirectionRight duration:1.0f]];
     }

@@ -25,6 +25,18 @@
 		5326CEE21B3CFFA10080AADC /* win.png in Resources */ = {isa = PBXBuildFile; fileRef = 5326CEE11B3CFFA10080AADC /* win.png */; };
 		534902131B34C93800B2EA57 /* EndScene.m in Sources */ = {isa = PBXBuildFile; fileRef = 534902121B34C93800B2EA57 /* EndScene.m */; };
 		534902161B34D43500B2EA57 /* GameManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 534902151B34D43500B2EA57 /* GameManager.m */; };
+		537221BA1B3D8337007FE94E /* lasershot.wav in Resources */ = {isa = PBXBuildFile; fileRef = 537221B91B3D8337007FE94E /* lasershot.wav */; };
+		537221C91B3D835A007FE94E /* fuck.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 537221BD1B3D835A007FE94E /* fuck.mp3 */; };
+		537221CA1B3D835A007FE94E /* fuck.wav in Resources */ = {isa = PBXBuildFile; fileRef = 537221BE1B3D835A007FE94E /* fuck.wav */; };
+		537221CC1B3D835A007FE94E /* lowhealth.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 537221C01B3D835A007FE94E /* lowhealth.mp3 */; };
+		537221CD1B3D835A007FE94E /* playerDeath.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 537221C11B3D835A007FE94E /* playerDeath.mp3 */; };
+		537221CE1B3D835A007FE94E /* playerhit-1.wav in Resources */ = {isa = PBXBuildFile; fileRef = 537221C21B3D835A007FE94E /* playerhit-1.wav */; };
+		537221CF1B3D835A007FE94E /* playerhit-2.wav in Resources */ = {isa = PBXBuildFile; fileRef = 537221C31B3D835A007FE94E /* playerhit-2.wav */; };
+		537221D01B3D835A007FE94E /* playerhit-3.wav in Resources */ = {isa = PBXBuildFile; fileRef = 537221C41B3D835A007FE94E /* playerhit-3.wav */; };
+		537221D11B3D835A007FE94E /* playerhit-4.wav in Resources */ = {isa = PBXBuildFile; fileRef = 537221C51B3D835A007FE94E /* playerhit-4.wav */; };
+		537221D21B3D835A007FE94E /* playerhit-5.wav in Resources */ = {isa = PBXBuildFile; fileRef = 537221C61B3D835A007FE94E /* playerhit-5.wav */; };
+		537221D31B3D835A007FE94E /* playerhit-6.wav in Resources */ = {isa = PBXBuildFile; fileRef = 537221C71B3D835A007FE94E /* playerhit-6.wav */; };
+		537221D41B3D835A007FE94E /* skeletonhit.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 537221C81B3D835A007FE94E /* skeletonhit.mp3 */; };
 		53BB600E1B2B8BF9009A4EF0 /* Entity.m in Sources */ = {isa = PBXBuildFile; fileRef = 53BB600D1B2B8BF9009A4EF0 /* Entity.m */; };
 		53BB60111B2B8CF7009A4EF0 /* Monster.m in Sources */ = {isa = PBXBuildFile; fileRef = 53BB60101B2B8CF7009A4EF0 /* Monster.m */; };
 		53E1BB911B233533005DAEDB /* Player.m in Sources */ = {isa = PBXBuildFile; fileRef = 53E1BB901B233533005DAEDB /* Player.m */; };
@@ -194,6 +206,18 @@
 		534902121B34C93800B2EA57 /* EndScene.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = EndScene.m; path = Source/EndScene.m; sourceTree = "<group>"; };
 		534902141B34D41C00B2EA57 /* GameManager.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GameManager.h; sourceTree = "<group>"; };
 		534902151B34D43500B2EA57 /* GameManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = GameManager.m; path = Source/GameManager.m; sourceTree = "<group>"; };
+		537221B91B3D8337007FE94E /* lasershot.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = lasershot.wav; sourceTree = "<group>"; };
+		537221BD1B3D835A007FE94E /* fuck.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = fuck.mp3; sourceTree = "<group>"; };
+		537221BE1B3D835A007FE94E /* fuck.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = fuck.wav; sourceTree = "<group>"; };
+		537221C01B3D835A007FE94E /* lowhealth.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = lowhealth.mp3; sourceTree = "<group>"; };
+		537221C11B3D835A007FE94E /* playerDeath.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = playerDeath.mp3; sourceTree = "<group>"; };
+		537221C21B3D835A007FE94E /* playerhit-1.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = "playerhit-1.wav"; sourceTree = "<group>"; };
+		537221C31B3D835A007FE94E /* playerhit-2.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = "playerhit-2.wav"; sourceTree = "<group>"; };
+		537221C41B3D835A007FE94E /* playerhit-3.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = "playerhit-3.wav"; sourceTree = "<group>"; };
+		537221C51B3D835A007FE94E /* playerhit-4.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = "playerhit-4.wav"; sourceTree = "<group>"; };
+		537221C61B3D835A007FE94E /* playerhit-5.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = "playerhit-5.wav"; sourceTree = "<group>"; };
+		537221C71B3D835A007FE94E /* playerhit-6.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = "playerhit-6.wav"; sourceTree = "<group>"; };
+		537221C81B3D835A007FE94E /* skeletonhit.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = skeletonhit.mp3; sourceTree = "<group>"; };
 		53BB600C1B2B8BE9009A4EF0 /* Entity.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Entity.h; sourceTree = "<group>"; };
 		53BB600D1B2B8BF9009A4EF0 /* Entity.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Entity.m; path = Source/Entity.m; sourceTree = "<group>"; };
 		53BB600F1B2B8CE1009A4EF0 /* Monster.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Monster.h; sourceTree = "<group>"; };
@@ -351,6 +375,18 @@
 		53E7ECDE1B191EFA001E7749 /* Sounds */ = {
 			isa = PBXGroup;
 			children = (
+				537221BD1B3D835A007FE94E /* fuck.mp3 */,
+				537221BE1B3D835A007FE94E /* fuck.wav */,
+				537221C01B3D835A007FE94E /* lowhealth.mp3 */,
+				537221C11B3D835A007FE94E /* playerDeath.mp3 */,
+				537221C21B3D835A007FE94E /* playerhit-1.wav */,
+				537221C31B3D835A007FE94E /* playerhit-2.wav */,
+				537221C41B3D835A007FE94E /* playerhit-3.wav */,
+				537221C51B3D835A007FE94E /* playerhit-4.wav */,
+				537221C61B3D835A007FE94E /* playerhit-5.wav */,
+				537221C71B3D835A007FE94E /* playerhit-6.wav */,
+				537221C81B3D835A007FE94E /* skeletonhit.mp3 */,
+				537221B91B3D8337007FE94E /* lasershot.wav */,
 				5326CEBF1B3CF04F0080AADC /* Game Music.mp3 */,
 				5326CEC01B3CF04F0080AADC /* Game Over - Loose.mp3 */,
 				5326CEC11B3CF04F0080AADC /* Game Over - Win.mp3 */,
@@ -841,13 +877,17 @@
 				5326CED11B3CFA470080AADC /* skeleton-1.png in Resources */,
 				5326CEC81B3CF59F0080AADC /* bg1.png in Resources */,
 				B71F5914188484E7003F4D28 /* iPad@2x.png in Resources */,
+				537221CD1B3D835A007FE94E /* playerDeath.mp3 in Resources */,
 				B71F5913188484E7003F4D28 /* iPad.png in Resources */,
 				B71F5912188484E7003F4D28 /* iPad-old@2x.png in Resources */,
 				B71F5916188484E7003F4D28 /* iPhone-old@2x.png in Resources */,
 				5326CEC51B3CF04F0080AADC /* Game Over - Win.mp3 in Resources */,
 				B737893B180761570076A88C /* Published-iOS in Resources */,
 				5326CEDE1B3CFDD20080AADC /* joy.png in Resources */,
+				537221D31B3D835A007FE94E /* playerhit-6.wav in Resources */,
+				537221CC1B3D835A007FE94E /* lowhealth.mp3 in Resources */,
 				5326CED21B3CFA470080AADC /* skeleton-2.png in Resources */,
+				537221C91B3D835A007FE94E /* fuck.mp3 in Resources */,
 				B71F591A188484E7003F4D28 /* Settings@2x.png in Resources */,
 				5326CEDD1B3CFDD20080AADC /* fire-2.png in Resources */,
 				B7378976180762440076A88C /* Default-Landscape~ipad.png in Resources */,
@@ -856,12 +896,20 @@
 				B71F5917188484E7003F4D28 /* iPhone.png in Resources */,
 				B7378975180762440076A88C /* Default-568h@2x.png in Resources */,
 				B71F5918188484E7003F4D28 /* iPhone@2x.png in Resources */,
+				537221BA1B3D8337007FE94E /* lasershot.wav in Resources */,
+				537221D01B3D835A007FE94E /* playerhit-3.wav in Resources */,
 				5326CEC31B3CF04F0080AADC /* Game Music.mp3 in Resources */,
+				537221D11B3D835A007FE94E /* playerhit-4.wav in Resources */,
 				5326CEC41B3CF04F0080AADC /* Game Over - Loose.mp3 in Resources */,
+				537221D41B3D835A007FE94E /* skeletonhit.mp3 in Resources */,
+				537221CA1B3D835A007FE94E /* fuck.wav in Resources */,
 				B7378977180762440076A88C /* Default.png in Resources */,
 				5326CECE1B3CF5E70080AADC /* spawner.png in Resources */,
 				5326CEC61B3CF04F0080AADC /* Menu.mp3 in Resources */,
+				537221CE1B3D835A007FE94E /* playerhit-1.wav in Resources */,
 				5326CEDF1B3CFDD20080AADC /* player-1.png in Resources */,
+				537221CF1B3D835A007FE94E /* playerhit-2.wav in Resources */,
+				537221D21B3D835A007FE94E /* playerhit-5.wav in Resources */,
 				B71F5911188484E7003F4D28 /* iPad-old.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

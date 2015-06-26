@@ -49,6 +49,7 @@
     self.userInteractionEnabled = YES;
     [self setMultipleTouchEnabled:(YES)];
     
+    [[OALSimpleAudio sharedInstance] setBgVolume:0.5f];
     [[OALSimpleAudio sharedInstance] playBg:@"Game Music.mp3" loop:YES];
 
     _physicsWorld = [CCPhysicsNode node];
@@ -144,6 +145,8 @@
     } else {
         _player.flipX = YES;
     }
+    
+    [[OALSimpleAudio sharedInstance] playEffect:@"lasershot.wav" loop:NO];
 }
 
 -(void)touchMoved:(CCTouch *)touch withEvent:(CCTouchEvent *)event {
@@ -192,6 +195,8 @@
 
 - (BOOL)ccPhysicsCollisionBegin:(CCPhysicsCollisionPair *)pair monsterCollision:(CCNode *)monsterNode projectileCollision:(CCNode *)projectileNode {
     
+    [[OALSimpleAudio sharedInstance] playEffect:@"skeletonhit.mp3" loop:NO];
+    
     Monster* monster = (Monster*) monsterNode;
     [monster takeHitWithDamage:1];
     [projectileNode removeFromParent];
@@ -209,6 +214,27 @@
 }
 
 - (BOOL)ccPhysicsCollisionBegin:(CCPhysicsCollisionPair *)pair monsterCollision:(CCNode *)monsterNode playerCollision:(CCNode *)playerNode {
+    
+    int lowerBound = 1;
+    int upperBound = 8;
+    float randValue = lowerBound + arc4random_uniform(upperBound - lowerBound + 1);
+    
+    if (randValue < 2) {
+        [[OALSimpleAudio sharedInstance] playEffect:@"playerhit-1.wav" loop:NO];
+    } else if (randValue < 3) {
+        [[OALSimpleAudio sharedInstance] playEffect:@"playerhit-2.wav" loop:NO];
+    } else if (randValue < 4) {
+        [[OALSimpleAudio sharedInstance] playEffect:@"playerhit-3.wav" loop:NO];
+    } else if (randValue < 5) {
+        [[OALSimpleAudio sharedInstance] playEffect:@"playerhit-4.wav" loop:NO];
+    } else if (randValue < 6) {
+        [[OALSimpleAudio sharedInstance] playEffect:@"playerhit-5.wav" loop:NO];
+    } else if (randValue < 7) {
+        [[OALSimpleAudio sharedInstance] playEffect:@"playerhit-6.wav" loop:NO];
+    } else if (randValue < 8) {
+        [[OALSimpleAudio sharedInstance] playEffect:@"fuck.wav" loop:NO];
+    }
+    
     
     Player* player = (Player*) playerNode;
     Monster* monster = (Monster*) monsterNode;

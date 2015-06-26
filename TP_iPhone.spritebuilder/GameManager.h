@@ -14,6 +14,8 @@
 -(void)decrementMonsterCount;
 -(void)decrementSpawnerCount;
 -(void)resetScore;
+-(void)setSpawnerDifficulty:(int)diff;
+-(int)getSpawnerDifficulty;
 
 -(void)setPlayerHP:(int)hp;
 -(int)playerHP;
