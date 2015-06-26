@@ -22,7 +22,6 @@
     CGPoint a;
     Projectile *_projectile;
     CGPoint _projectileHitPosition;
-    Spawner *_spawner;
     CCLabelTTF *labelPlayerHP;
 }
 
@@ -93,8 +92,14 @@
     _player = [[Player alloc] init];
     [_physicsWorld addChild:_player];
     
-    _spawner = [[Spawner alloc] initWithPhysicsWorld:_physicsWorld andPosition:ccp(0.8f, 0.9f)];
-    [_physicsWorld addChild:_spawner];
+    Spawner* _spawnerTR = [[Spawner alloc] initWithPhysicsWorld:_physicsWorld andPosition:ccp(488, 250)];
+    [_physicsWorld addChild:_spawnerTR];
+    
+    Spawner* _spawnerTL = [[Spawner alloc] initWithPhysicsWorld:_physicsWorld andPosition:ccp(80, 250)];
+    [_physicsWorld addChild:_spawnerTL];
+    
+    Spawner*  _spawnerBR = [[Spawner alloc] initWithPhysicsWorld:_physicsWorld andPosition:ccp(488, 72)];
+    [_physicsWorld addChild:_spawnerBR];
     
     CCButton *backButton = [CCButton buttonWithTitle:@"[ Menu ]" fontName:@"Verdana-Bold" fontSize:18.0f];
     backButton.positionType = CCPositionTypeNormalized;

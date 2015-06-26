@@ -13,7 +13,8 @@
     
     self = [super initWithImageNamed:@"spawner.png" andHP:3];
     if (!self) return(nil);
-    self.position  = ccp(300, 160);
+//    self.position  = ccp(490, 250);
+    self.position = position;
     self.physicsBody = [CCPhysicsBody bodyWithRect:(CGRect){CGPointZero, self.contentSize} cornerRadius:0];
     self.physicsBody.collisionGroup = @"evilGroup";
     self.physicsBody.collisionType = @"spawnerCollision";
