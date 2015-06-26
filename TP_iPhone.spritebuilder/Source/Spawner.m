@@ -11,7 +11,7 @@
 
 - (id)initWithPhysicsWorld:(CCPhysicsNode*)physicsWorld andPosition:(CGPoint)position {
     
-    self = [super initWithImageNamed:@"projectile.png" andHP:3];
+    self = [super initWithImageNamed:@"spawner.png" andHP:3];
     if (!self) return(nil);
     
 //    TODO: no anda el normalized!!
@@ -23,6 +23,11 @@
     self.physicsBody.collisionType = @"spawnerCollision";
     self.physicsBody.type = CCPhysicsBodyTypeKinematic;
     self.physicsWorld = physicsWorld;
+
+    self.scaleX = 0.23f;
+    self.scaleY = 0.23f;
+    
+    
     [[GameManager gameManager] incrementSpawnerCount];
     return self;
 }
