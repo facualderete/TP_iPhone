@@ -14,8 +14,10 @@
     self = [super init];
     if (!self) return(nil);
     
-    CCNodeColor *background = [CCNodeColor nodeWithColor:[CCColor colorWithRed:0.2f green:0.2f blue:0.2f alpha:1.0f]];
-    [self addChild:background];
+	CCSprite* background = [CCSprite spriteWithFile:@"menubackground.png"];
+	background.tag = 1;
+	background.anchorPoint = CGPointMake(0, 0);
+	[self addChild:background];
 
     CCLabelTTF *label = [CCLabelTTF labelWithString:@"Gauntlet" fontName:@"Chalkduster" fontSize:80.0f];
     label.positionType = CCPositionTypeNormalized;
