@@ -16,6 +16,7 @@
 -(void)resetScore;
 -(void)setSpawnerDifficulty:(int)diff;
 -(int)getSpawnerDifficulty;
+-(int)getProjectileSpeed;
 
 -(void)setPlayerHP:(int)hp;
 -(int)playerHP;

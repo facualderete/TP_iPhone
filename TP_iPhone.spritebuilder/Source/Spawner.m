@@ -31,8 +31,7 @@
     [self.physicsWorld addChild:monster];
 }
 
-- (void)onEnter
-{
+- (void)onEnter{
     [super onEnter];
     [self schedule:@selector(addMonster:) interval:2.5];
 }

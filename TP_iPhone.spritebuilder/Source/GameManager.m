@@ -8,6 +8,7 @@
     int playerHP;
     int monsterSpeed;
     int spawnerDifficulty;
+	int projectileSpeed;
 }
 
 static GameManager* _gameManager = nil;
@@ -46,6 +47,14 @@ static GameManager* _gameManager = nil;
 
 -(int)getSpawnerDifficulty {
     return spawnerDifficulty;
+}
+
+-(void)projectileSpeed:(int)speed  {
+	projectileSpeed = speed;
+}
+
+-(int)projectileSpeed {
+	return projectileSpeed;
 }
 
 -(void)setMonsterSpeed:(int)speed {

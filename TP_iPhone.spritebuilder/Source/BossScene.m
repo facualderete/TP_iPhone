@@ -1,4 +1,4 @@
-#import "MainScene.h"
+#import "BossScene.h"
 #import "IntroScene.h"
 #import "Player.h"
 #import "Projectile.h"
@@ -7,13 +7,13 @@
 #import "Monster.h"
 #import "GameManager.h"
 #import "EndScene.h"
-#import "BossScene.h"
 
-@implementation MainScene
+@implementation BossScene
 {
     int wallThickness;
     float wallNotVisible;
     Player *_player;
+	Boss *_boss;
     CCPhysicsNode *_physicsWorld;
     CGPoint currentJoystickPosition;
     Joystick *_joystick;
@@ -24,7 +24,6 @@
     Projectile *_projectile;
     CGPoint _projectileHitPosition;
     CCLabelTTF *labelPlayerHP;
-	CCLabelTTF *labelMonsterHP;
 }
 
 + (MainScene*) scene
@@ -38,7 +37,7 @@
     if (!self) return(nil);
     
     CGSize winSize = [CCDirector sharedDirector].viewSize;
-    CCSprite* background = [CCSprite spriteWithImageNamed:@"bg1.png"];
+    CCSprite* background = [CCSprite spriteWithImageNamed:@"bg2.png"];
     CGSize imageSize = background.contentSize;
     background.scaleX = winSize.width / imageSize.width;
     background.scaleY = winSize.height / imageSize.height;
@@ -52,7 +51,7 @@
     [self setMultipleTouchEnabled:(YES)];
     
     [[OALSimpleAudio sharedInstance] setBgVolume:0.5f];
-    [[OALSimpleAudio sharedInstance] playBg:@"Game Music.mp3" loop:YES];
+    [[OALSimpleAudio sharedInstance] playBg:@"boss-music.mp3" loop:YES];
 
     _physicsWorld = [CCPhysicsNode node];
     _physicsWorld.gravity = ccp(0,0);
@@ -95,15 +94,9 @@
     _player = [[Player alloc] init];
     [_physicsWorld addChild:_player];
     
-    Spawner* _spawnerTR = [[Spawner alloc] initWithPhysicsWorld:_physicsWorld andPosition:ccp(488, 250)];
-    [_physicsWorld addChild:_spawnerTR];
-    
-    Spawner* _spawnerTL = [[Spawner alloc] initWithPhysicsWorld:_physicsWorld andPosition:ccp(80, 250)];
-    [_physicsWorld addChild:_spawnerTL];
-    
-    Spawner*  _spawnerBR = [[Spawner alloc] initWithPhysicsWorld:_physicsWorld andPosition:ccp(488, 72)];
-    [_physicsWorld addChild:_spawnerBR];
-    
+	_boss = [[Boss alloc] init];
+	[_physicsWorld addChild: _boss];
+       
     CCButton *backButton = [CCButton buttonWithTitle:@"[ Menu ]" fontName:@"Verdana-Bold" fontSize:18.0f];
     backButton.positionType = CCPositionTypeNormalized;
     backButton.position = ccp(0.85f, 0.95f); // Top Right of screen
@@ -115,19 +108,21 @@
     labelPlayerHP.position = ccp(0.1, 0.9);
     [self addChild:labelPlayerHP];
 	
-	labelMonsterHP = [CCLabelTTF labelWithString:[NSString stringWithFormat:@"Left to Kill: %d", [[GameManager gameManager] spawnerCount] + [[GameManager gameManager] monsterCount]] fontName:@"Marker Felt" fontSize:12];
-    labelMonsterHP.positionType = CCPositionTypeNormalized;
-    labelMonsterHP.position = ccp(0.5, 0.9);
-    [self addChild:labelMonsterHP];
+	labelBossHP = [CCLabelTTF labelWithString:[NSString stringWithFormat:@"Boss HP %d", _boss.currentHP] fontName:@"Marker Felt" fontSize:12];
+    labelBossHP.positionType = CCPositionTypeNormalized;
+    labelBossHP.position = ccp(0.5, 0.9);
+    [self addChild:labelBossHP];
     
     return self;
 }
 
-- (void)dealloc {
+- (void)dealloc
+{
     // clean up code goes here
 }
 
-- (void)onExit {
+- (void)onExit
+{
     [super onExit];
 }
 
@@ -179,11 +174,13 @@
     }
     
     _projectileVelocity = CGPointMake(_projectileHitPosition.x - _projectile.initialPosition.x, _projectileHitPosition.y - _projectile.initialPosition.y);
-	_projectile.physicsBody.velocity = ccpMult(ccpNormalize(_projectileVelocity), _projectile.speed);
+    
+    _projectile.physicsBody.velocity = ccpMult(ccpNormalize(_projectileVelocity), _projectile.speed);
 
     if([[GameManager gameManager] spawnerCount] == 0 && [[GameManager gameManager] monsterCount] == 0) {
-        [[CCDirector sharedDirector] replaceScene: [BossScene scene]
-                               withTransition:[CCTransition transitionCrossFadeWithDuration:1.0f]];
+        
+        [[CCDirector sharedDirector] replaceScene: [EndScene initWithString: @"A winrar is YOU!" andResult:YES]
+                               withTransition:[CCTransition transitionPushWithDirection:CCTransitionDirectionRight duration:1.0f]];
     }
 }
 
@@ -195,32 +192,17 @@
 //Collisions
 //-----------------------------------------------------------------------------------------------------
 
-- (BOOL)ccPhysicsCollisionBegin:(CCPhysicsCollisionPair *)pair monsterCollision:(CCNode *)monsterNode projectileCollision:(CCNode *)projectileNode {
+- (BOOL)ccPhysicsCollisionBegin:(CCPhysicsCollisionPair *)pair monsterCollision:(CCNode *)bossNode projectileCollision:(CCNode *)projectileNode {
     
     [[OALSimpleAudio sharedInstance] playEffect:@"skeletonhit.mp3" loop:NO];
     
-    Monster* monster = (Monster*) monsterNode;
-    [monster takeHitWithDamage:1];
+    Boss* boss = (Boss*) bossNode;
+    [boss takeHitWithDamage:1];
     [projectileNode removeFromParent];
-	
-	[labelMonsterHP setString:[NSString stringWithFormat:@"Player HP %d", [[GameManager gameManager] spawnerCount] + [[GameManager gameManager] monsterCount]]]];
     return YES;
 }
 
-- (BOOL)ccPhysicsCollisionBegin:(CCPhysicsCollisionPair *)pair spawnerCollision:(CCNode *)spawnerNode projectileCollision:(CCNode *)projectileNode {
-    
-	[[OALSimpleAudio sharedInstance] playEffect:@"skeletonhit.mp3" loop:NO];
-	
-    Spawner* spawner = (Spawner*) spawnerNode;
-    [spawner takeHitWithDamage:1];
-	Projectile* projectile = (Projectile*) projectileNode;
-    [projectile removeFromParent];
-	
-	[labelMonsterHP setString:[NSString stringWithFormat:@"Player HP %d", [[GameManager gameManager] spawnerCount] + [[GameManager gameManager] monsterCount]]]];
-    return YES;
-}
-
-- (BOOL)ccPhysicsCollisionBegin:(CCPhysicsCollisionPair *)pair monsterCollision:(CCNode *)monsterNode playerCollision:(CCNode *)playerNode {
+- (BOOL)ccPhysicsCollisionBegin:(CCPhysicsCollisionPair *)pair monsterCollision:(CCNode *)bossNode playerCollision:(CCNode *)playerNode {
     
     int lowerBound = 1;
     int upperBound = 8;
@@ -243,12 +225,12 @@
     }
     
     Player* player = (Player*) playerNode;
+    Boss* boss = (Boss*) bossNode;
+    
     [player takeHitWithDamage:1];
-	Monster* monster = (Monster*) monsterNode;
-    [monster takeHitWithDamage:1];
+    [boss takeHitWithDamage:1];
     
     [labelPlayerHP setString:[NSString stringWithFormat:@"Player HP %d", _player.currentHP]];
-	[labelMonsterHP setString:[NSString stringWithFormat:@"Player HP %d", [[GameManager gameManager] spawnerCount] + [[GameManager gameManager] monsterCount]]]];
     return YES;
 }
 

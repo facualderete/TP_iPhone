@@ -76,6 +76,7 @@
     [[GameManager gameManager] setPlayerHP:20];
     [[GameManager gameManager] setMonsterSpeed:50];
     [[GameManager gameManager] setSpawnerDifficulty:1];
+	[[GameManager gameManager] setProjectileSpeed:200];
     [[CCDirector sharedDirector] replaceScene:[MainScene scene]
                                withTransition:[CCTransition transitionCrossFadeWithDuration:0.5f]];
 }
@@ -85,6 +86,7 @@
     [[GameManager gameManager] setPlayerHP:10];
     [[GameManager gameManager] setMonsterSpeed:100];
     [[GameManager gameManager] setSpawnerDifficulty:2];
+	[[GameManager gameManager] setProjectileSpeed:150];
     [[CCDirector sharedDirector] replaceScene:[MainScene scene]
                                withTransition:[CCTransition transitionCrossFadeWithDuration:0.5f]];
 }
@@ -94,6 +96,7 @@
     [[GameManager gameManager] setPlayerHP:5];
     [[GameManager gameManager] setMonsterSpeed:150];
     [[GameManager gameManager] setSpawnerDifficulty:3];
+	[[GameManager gameManager] setProjectileSpeed:125];
     [[CCDirector sharedDirector] replaceScene:[MainScene scene]
                                withTransition:[CCTransition transitionCrossFadeWithDuration:0.5f]];
 }

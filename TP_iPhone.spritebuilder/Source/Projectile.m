@@ -1,10 +1,8 @@
 #import "Projectile.h"
 #import "Player.h"
-
-#define PROJECTILE_SPEED ((float) 200.0f)
+#import "GameManager.h"
 
 @implementation Projectile {
-
     int frame_number;
 }
 
@@ -35,7 +33,7 @@ CGPoint initialPosition;
 }
 
 -(float)speed {
-    return PROJECTILE_SPEED;
+    return [[GameManager gameManager] getProjectileSPeed];
 }
 
 -(CGPoint)initialPosition {
